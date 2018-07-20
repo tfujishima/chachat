@@ -24,4 +24,16 @@ public class RoomService {
 		room.setRoomId(roomId);
 		roomRepository.save(room);
 	}
+	
+	public boolean roomIdisInDB(String roomId) {
+		return !(roomRepository.findById(roomId).equals(Optional.empty())); 
+
+	}
+	/*
+	public Room getRoomById(String roomId) {
+		Room room = findById(roomId)
+		return a;
+	}
+	*/
 }
+
