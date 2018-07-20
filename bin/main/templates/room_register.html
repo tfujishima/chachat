@@ -15,6 +15,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h1>Chachat</h1>
+				<!-- <img alt="test" th:src="@{/img/Desert.jpg}"> -->
 			</div>
 		</div>
 		<form th:object="${registForm}" action="/" method="post">
@@ -35,7 +36,8 @@
 		</form>
 		<div class="row" th:if="${valid_error == '0'}">
 			<div class="col-sm-8">
-				<input id="copyTarget" type="text" th:value="|localhost:8080/${url}/|" readonly></input>
+				<input id="copyTarget" type="text"
+					th:value="|localhost:8080/${url}/|" readonly></input>
 			</div>
 			<div class="col-sm-4">
 				<button onclick="copyToClipboard()">copy</button>
