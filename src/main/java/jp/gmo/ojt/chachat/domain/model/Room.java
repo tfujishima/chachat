@@ -11,15 +11,7 @@ public class Room implements Serializable {
 	@Id
 	private String roomId;
 	private String roomName;
-	private String createdAt;
-
-	public String getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}
+	private String pass;
 
 	public String getRoomId() {
 		return roomId;
@@ -37,4 +29,21 @@ public class Room implements Serializable {
 		this.roomName = roomName;
 	}
 
+	private String createdAt;
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 }
