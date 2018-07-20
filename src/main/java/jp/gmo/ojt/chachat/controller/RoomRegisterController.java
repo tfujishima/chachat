@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 //import jp.gmo.ojt.chachat.bean.RoomRegistResult;
 import jp.gmo.ojt.chachat.form.RegistForm;
+import jp.gmo.ojt.chachat.util.RoomUtility;
 
 @Controller
 @RequestMapping("/")
@@ -36,6 +37,7 @@ public class RoomRegisterController {
 			return "room_register.html";
 		}
 		model.addAttribute("valid_error", "0");
+		model.addAttribute("url", RoomUtility.makeRoomId(form.getRoomName()));
 
 		return "room_register.html";
 	}
