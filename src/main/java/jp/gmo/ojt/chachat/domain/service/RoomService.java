@@ -24,12 +24,4 @@ public class RoomService {
 		room.setRoomId(roomId);
 		roomRepository.save(room);
 	}
-	
-	public boolean roomIdisInDB(String roomId) {
-		System.out.println("result::::::::" + roomRepository.findById(roomId));
-		boolean check = !(roomRepository.findById(roomId).equals(Optional.empty())); 
-		System.out.println(check);
-		return check;
-		
-	}
 }
