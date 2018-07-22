@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,7 +20,7 @@ public class RoomLoginController {
 	RoomService roomService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(@PathVariable("roomId") String roomId) {
+	public String index(@PathVariable("roomId") String roomId, Model model) {
 		Optional<Room> rooms = roomService.serchRoomId(roomId);
 		System.out.println(rooms);
 		System.out.println(rooms.equals(Optional.empty()));
@@ -27,6 +28,7 @@ public class RoomLoginController {
 			return "404";
 		} else {
 			Room room = rooms.get();
+			
 			return "room_login";
 		}
 
