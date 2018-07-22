@@ -34,7 +34,10 @@ var StageManager = (function(){
         	  registLowestLayerImageEvent(konvaImage);
         	  break;
           case 'tagDrawableNode':
-        	  registTagEvent(konvaImage.findAncestor('Group'));
+        	  var tagGroup = konvaImage.findAncestor('Group');
+        	  registTagEvent(tagGroup);
+        	  //for textNode bug(not set width)
+        	  tagGroup.findOne('Text').width(konvaImage.width() - 20);
         	  break;
           default:
           }
