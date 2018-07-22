@@ -29,6 +29,15 @@ var StageManager = (function(){
           konvaImage.image(canvas);
           canvas.getContext('2d').drawImage(imageObj, 0, 0);
           konvaImage.findAncestor('Layer').batchDraw();
+          switch(konvaImage.getName()){
+          case 'lowestLayerImage':
+        	  registLowestLayerImageEvent(konvaImage);
+        	  break;
+          case 'tagDrawableNode':
+        	  registTagEvent(konvaImage.findAncestor('Group'));
+        	  break;
+          default:
+          }
         }
         imageObj.src = imageData[konvaImage.getId()];
       });
@@ -166,9 +175,87 @@ var registLowestLayerImageEvent = function (lowestLayerImage){
 createLowestLayer(stage);
 registLowestLayerImageEvent(stage.findOne('.lowestLayerImage'));
 
-stage.on('contentMouseup.proto',function() {
+$(window).mouseup(function(){
     isPaint = false;
-});
+ });
+
+var registTagEvent = function(tagGroup) {
+	   tagGroup.on('mouseover', function(e) {
+	       document.body.style.cursor = 'pointer';
+	   });
+	   tagGroup.on('mouseout', function(e) {
+	       document.body.style.cursor = 'default';
+	   });
+
+	   //for text modify
+	   var isTagModifing = false;
+	   tagGroup.on('dblclick', function() {
+	       if( isTagModifing )
+	         return;
+	       isTagModifing = true;
+	       var textNode = tagGroup.findOne('Text');
+	       var textPosition = textNode.getAbsolutePosition();
+	       var stageBox = stage.getContainer().getBoundingClientRect();
+
+	       var areaPosition = {
+	           x: textPosition.x + stageBox.left,
+	           y: textPosition.y + stageBox.top
+	       };
+
+	       var textarea = document.createElement('textarea');
+	       document.body.appendChild(textarea);
+
+	       textarea.value = textNode.text();
+	       textarea.style.position = 'absolute';
+	       textarea.style.top = areaPosition.y + 'px';
+	       textarea.style.left = areaPosition.x + 'px';
+	       textarea.style.width = textNode.width() + 'px';
+	       textarea.style.height = textNode.height() + 'px';
+
+	       textarea.focus();
+
+
+	       textarea.addEventListener('keydown', function (e) {
+	           if (e.keyCode === 13) {
+	               textNode.text(textarea.value);
+	               tagGroup.findAncestor('Layer').batchDraw();
+	               document.body.removeChild(textarea);
+	               isTagModifing = false;
+	           }
+	       });
+	   });
+
+	   
+	   var lastTagPointerPosition;
+	   var isDrag = false;
+	   var drawableNode = tagGroup.findOne('.tagDrawableNode');
+	   var drawLineOnTag = function(){
+	     if (isPaint && !isDrag) {
+	       drawLineToCurrentPointerPosition(drawableNode, lastTagPointerPosition);
+	     }
+	   }
+
+	   tagGroup.on('mouseenter', function() {
+	     lastTagPointerPosition = lastPointerPosition;
+	     drawLineOnTag();
+	     lastTagPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stage);
+	   });
+	   tagGroup.on('mouseout', function() {
+	     lastPointerPosition = lastTagPointerPosition;
+	     drawLineOnTag();
+	   });
+	   tagGroup.on('mousedown', function(){
+	     isDrag = true;
+	   });
+
+	   tagGroup.on('mouseup', function(){
+	     isDrag = false;
+	   });
+	   tagGroup.on('mousemove', function() {
+	     drawLineOnTag();
+	     lastTagPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stage);
+	   });
+}
 
 var createTag = function(stage) {
    var tagHeight = 200;
@@ -181,6 +268,7 @@ var createTag = function(stage) {
        x: stage.width()/4 + Math.floor(Math.random()*100),
        y: stage.height()/4 + Math.floor(Math.random()*100) ,
        draggable: true,
+       name: 'tagGroup'
    });
 
    //for tag layer(backgroundImage,text,drawableImage)
@@ -208,89 +296,16 @@ var createTag = function(stage) {
        image: tagCanvas,
        stroke: 'khaki',
        shadowBlur: 5,
-       id: 'tag-00000'
+       id: 'tag-00000',
+       name: 'tagDrawableNode'
    });
-
-
-   group.on('mouseover', function(e) {
-       document.body.style.cursor = 'pointer';
-   });
-   group.on('mouseout', function(e) {
-       document.body.style.cursor = 'default';
-   });
-
-   //for text modify
-   var isTagModifing = false;
-   group.on('dblclick', function() {
-       if( isTagModifing )
-         return;
-       isTagModifing = true;
-
-       var textPosition = textNode.getAbsolutePosition();
-       var stageBox = stage.getContainer().getBoundingClientRect();
-
-       var areaPosition = {
-           x: textPosition.x + stageBox.left,
-           y: textPosition.y + stageBox.top
-       };
-
-       var textarea = document.createElement('textarea');
-       document.body.appendChild(textarea);
-
-       textarea.value = textNode.text();
-       textarea.style.position = 'absolute';
-       textarea.style.top = areaPosition.y + 'px';
-       textarea.style.left = areaPosition.x + 'px';
-       textarea.style.width = textNode.width() + 'px';
-       textarea.style.height = textNode.height() + 'px';
-
-       textarea.focus();
-
-
-       textarea.addEventListener('keydown', function (e) {
-           if (e.keyCode === 13) {
-               textNode.text(textarea.value);
-               tagLayer.batchDraw();
-               document.body.removeChild(textarea);
-               isTagModifing = false;
-           }
-       });
-   });
-
+   
    group.add(backGround);
    group.add(textNode);
    group.add(drawableNode);
    tagLayer.add(group);
+   registTagEvent(group);
    tagLayer.batchDraw();
-
-   var lastTagPointerPosition;
-   var isDrag = false;
-   var drawLineOnTag = function(){
-     if (isPaint && !isDrag) {
-       drawLineToCurrentPointerPosition(drawableNode, lastTagPointerPosition);
-     }
-   }
-
-   group.on('mouseenter', function() {
-     lastTagPointerPosition = lastPointerPosition;
-     drawLineOnTag();
-     lastTagPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stage);
-   });
-   group.on('mouseout', function() {
-     lastPointerPosition = lastTagPointerPosition;
-     drawLineOnTag();
-   });
-   group.on('mousedown', function(){
-     isDrag = true;
-   });
-
-   group.on('mouseup', function(){
-     isDrag = false;
-   });
-   group.on('mousemove', function() {
-     drawLineOnTag();
-     lastTagPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stage);
-   });
 }
 
 $('#tool').on('change', function() {
