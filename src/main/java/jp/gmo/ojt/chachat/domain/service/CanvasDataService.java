@@ -13,11 +13,17 @@ public class CanvasDataService {
 	CanvasDataRepository canvasDataRepository;
 
 	public CanvasData getCanvasData(String roomId, Integer canvasId) {
-		//return canvasDataRepository.findByRoomIdAndCanvasId(roomId, canvasId);
 		return canvasDataRepository.findByCanvasIdentity(new CanvasIdentity(roomId, canvasId));
 	}
 
 	public void saveCanvasData(CanvasData canvasData) {
-		canvasDataRepository.save(canvasData);
+		CanvasData data = canvasDataRepository.findByCanvasIdentity(canvasData.getCanvasIdentity());
+		if(data == null) {
+		    canvasDataRepository.save(canvasData);
+		}else {
+			data.setStage(canvasData.getStage());
+			data.setImages(canvasData.getImages());
+			canvasDataRepository.save(data);
+		}
 	}
 }

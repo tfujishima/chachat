@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -21,7 +22,9 @@ public class CanvasData implements Serializable {
 	private String stage;
     @Lob
 	private String images;
+    @NotNull
     private Date createdAt;
+    @NotNull
     private Date updatedAt;
 
     public CanvasData() {
