@@ -292,11 +292,12 @@ var createTag = function(stage) {
    var tagCanvas = document.createElement('canvas');
    tagCanvas.width = tagWidth;
    tagCanvas.height = tagHeight;
+   var tagId = 'tag-' + new Date().getTime().toString(16)  + Math.floor(1000*Math.random()).toString(16);
    var drawableNode = new Konva.Image({
        image: tagCanvas,
        stroke: 'khaki',
        shadowBlur: 5,
-       id: 'tag-00000',
+       id: tagId,
        name: 'tagDrawableNode'
    });
    
