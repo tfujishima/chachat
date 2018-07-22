@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.gmo.ojt.chachat.domain.model.Room;
 import jp.gmo.ojt.chachat.domain.service.RoomService;
+import jp.gmo.ojt.chachat.session.SessionRoom;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
@@ -18,6 +20,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class RoomLoginController {
 	@Autowired
 	RoomService roomService;
+	@Autowired
+	SessionRoom sessionRoom;
+	
+	@ModelAttribute
+	public SessionRoom setUpSession() {
+		return sessionRoom;
+		
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(@PathVariable("roomId") String roomId, Model model) {
@@ -28,7 +38,7 @@ public class RoomLoginController {
 			return "404";
 		} else {
 			Room room = rooms.get();
-			
+			sessionRoom.setRoom(room);
 			return "room_login";
 		}
 
