@@ -3,13 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>Chachat</title>
+  <link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
   <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
 </head>
 <body>
-  <h1>Chachat</h1>
-  <!-- canvas is here -->
+  ツール的何か：
+  <select id="tool">
+    <option value="brush">ペンモード</option>
+    <option value="eraser">消しゴムモード</option>
+  </select>
+  <button type=button onclick="createTag(stage);">付箋召喚</button>
+  <button type=button onclick="stageManager.pushStageData()">データプッシュ</button>
+  <button type=button onclick="stageManager.syncStageDataFromServer();">データプル</button>
+  <div class="row">
+    <div class="col-md-2">
+      <p>hoge</p>
+    </div>
+    <div class="col-md-10">
+      <div id="container"></div>
+    </div>
+  </div>
   <p>chachat room page</p>
   <!-- chat is here -->
   <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/konva/2.1.7/konva.min.js}"></script>
+  <script src="/js/collaborate_canvas.js" th:src="@{/js/collaborate_canvas.js}"></script>
 </body>
 </html>
