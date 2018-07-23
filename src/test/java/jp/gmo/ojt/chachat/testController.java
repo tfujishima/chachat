@@ -1,4 +1,4 @@
-package jp.gmo.ojt.chachat.controller;
+package jp.gmo.ojt.chachat;
 
 import javax.servlet.http.HttpSession;
 

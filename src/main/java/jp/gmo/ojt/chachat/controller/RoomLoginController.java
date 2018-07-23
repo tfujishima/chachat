@@ -46,7 +46,7 @@ public class RoomLoginController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String loginAuth(@PathVariable("roomId") String roomId, LoginForm form) {
 		session.setAttribute("userName",form.getUserName());
-		//return "redirect:/rooms/{roomId}/chachat";
-		return "redirect:/test/";
+		return "redirect:/rooms/{roomId}/chachat";
+		//return "redirect:/test/";
 	}
 }
