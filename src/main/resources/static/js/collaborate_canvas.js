@@ -353,4 +353,5 @@ $('#tool').on('change', function() {
   mode = this.value;
 });
 
+stageManager.syncStageDataFromServer();
 var canvasStompClient = new CanvasStompClient();
