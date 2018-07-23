@@ -6,13 +6,12 @@
 <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
 </head>
 <body>
-	<h1 th:text="|${sessionRoom.room.roomName}|">Chachat</h1>
+	<h1 th:text="|${session.room.getRoomName()}|">Chachat</h1>
 	<p>login room page</p>
-	<form th:object="${sessionUser}" th:action="|/rooms/${roomId}/|"
+	<form th:object="${loginForm}" th:action="|/rooms/${roomId}/|"
 		method="post">
 		名前: <input th:field="*{userName}" type="text" />
 		<button type="submit">決定</button>
 	</form>
-	<span th:text="${sessionUser}"></span><br>
 </body> 
 </html>
