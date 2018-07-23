@@ -14,13 +14,13 @@ var StageManager = (function(){
       context: this,
     }).done( function(data, status, xhr){
       //stage regenerate
-      var stageScale = stage.getScale();
-      stage.destroy();
-      stage = Konva.Node.create(data.stage, 'container');
-      stage.scale(stageScale);
+      var stageScale = this.stage.getScale();
+      this.stage.destroy();
+      this.stage = Konva.Node.create(data.stage, 'container');
+      this.stage.scale(stageScale);
       imageData = JSON.parse(data.images);
       //apply image for all konvaImage
-      stage.find('Image').each(function(konvaImage){
+      this.stage.find('Image').each(function(konvaImage){
         var imageObj = new Image();
         imageObj.onload = function(){
           var canvas = document.createElement('canvas');
@@ -44,7 +44,7 @@ var StageManager = (function(){
         }
         imageObj.src = imageData[konvaImage.getId()];
       });
-      stage.draw()
+      this.stage.draw()
     });
   }
   StageManager.prototype.pushStageData = function (){
@@ -150,7 +150,7 @@ var drawLineToCurrentPointerPosition = function (konvaImage, lastPointerPosition
     y: lastPointerPosition.y - konvaImage.y() - konvaImage.parent.y()
   };
   context.moveTo(localPos.x, localPos.y);
-  var pos = canvasUtil.getCurrentCanvasPointerPosition(stage);
+  var pos = canvasUtil.getCurrentCanvasPointerPosition(stageManager.getStage());
   localPos = {
     x: pos.x - konvaImage.x() - konvaImage.parent.x(),
     y: pos.y - konvaImage.y() - konvaImage.parent.y()
@@ -166,17 +166,17 @@ var registLowestLayerImageEvent = function (lowestLayerImage){
   lowestLayerImage.on('mousemove', function() {
     if(isPaint){
       drawLineToCurrentPointerPosition(lowestLayerImage, lastPointerPosition);
-      lastPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stage);
+      lastPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stageManager.getStage());
     }
   });
   lowestLayerImage.on('mousedown', function() {
     isPaint = true;
-    lastPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stage);
+    lastPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stageManager.getStage());
   });
 }
 
-createLowestLayer(stage);
-registLowestLayerImageEvent(stage.findOne('.lowestLayerImage'));
+createLowestLayer(stageManager.getStage());
+registLowestLayerImageEvent(stageManager.getStage().findOne('.lowestLayerImage'));
 
 $(window).mouseup(function(){
     isPaint = false;
@@ -198,7 +198,7 @@ var registTagEvent = function(tagGroup) {
 	       isTagModifing = true;
 	       var textNode = tagGroup.findOne('Text');
 	       var textPosition = textNode.getAbsolutePosition();
-	       var stageBox = stage.getContainer().getBoundingClientRect();
+	       var stageBox = stageManager.getStage().getContainer().getBoundingClientRect();
 
 	       var areaPosition = {
 	           x: textPosition.x + stageBox.left,
@@ -241,7 +241,7 @@ var registTagEvent = function(tagGroup) {
 	   tagGroup.on('mouseenter', function() {
 	     lastTagPointerPosition = lastPointerPosition;
 	     drawLineOnTag();
-	     lastTagPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stage);
+	     lastTagPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stageManager.getStage());
 	   });
 	   tagGroup.on('mouseout', function() {
 	     lastPointerPosition = lastTagPointerPosition;
@@ -256,7 +256,7 @@ var registTagEvent = function(tagGroup) {
 	   });
 	   tagGroup.on('mousemove', function() {
 	     drawLineOnTag();
-	     lastTagPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stage);
+	     lastTagPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stageManager.getStage());
 	   });
 }
 
