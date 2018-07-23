@@ -61,6 +61,6 @@ public class RoomLoginController {
 	public String loginAuth(@PathVariable("roomId") String roomId, LoginForm form) {
 		sessionRoom.setRoom(sessionRoom.getRoom());
 		sessionUser.setUserName(form.getUserName());
-		return "redirect:/test/";
+		return "redirect:/rooms/{room_Id}/chachat";
 	}
 }
