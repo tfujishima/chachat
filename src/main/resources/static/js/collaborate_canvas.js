@@ -98,7 +98,7 @@ var canvasSize = {
   height: 720
 }
 
-var canvasUtil = new CanvasUtil(stageSize, canvasSize);
+canvasUtil = new CanvasUtil(stageSize, canvasSize);
 
 var stage = new Konva.Stage({
   container: 'container',
@@ -107,7 +107,7 @@ var stage = new Konva.Stage({
   scale: canvasUtil.getScale()
 });
 
-var stageManager = new StageManager(stage);
+stageManager = new StageManager(stage);
 
 var createLowestLayer = function (stage){
   var lowestLayer = new Konva.Layer({id: 'lowestLayer'});
