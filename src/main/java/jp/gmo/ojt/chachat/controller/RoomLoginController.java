@@ -45,8 +45,6 @@ public class RoomLoginController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(@PathVariable("roomId") String roomId, Model model) {
 		Optional<Room> rooms = roomService.serchRoomId(roomId);
-		System.out.println("#####rooms"+rooms);
-		System.out.println("#####rooms is empty?" +rooms.equals(Optional.empty()));
 		if (rooms.equals(Optional.empty())) {
 			return "404";
 		} else {
@@ -59,8 +57,6 @@ public class RoomLoginController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String loginAuth(@PathVariable("roomId") String roomId, LoginForm form) {
-		sessionRoom.setRoom(sessionRoom.getRoom());
-		sessionUser.setUserName(form.getUserName());
 		return "redirect:/rooms/{room_Id}/chachat";
 	}
 }
