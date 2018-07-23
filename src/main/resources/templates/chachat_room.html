@@ -14,7 +14,7 @@
     <option value="brush">ペンモード</option>
     <option value="eraser">消しゴムモード</option>
   </select>
-  <button type=button onclick="createTag(stage);">付箋召喚</button>
+  <button type=button onclick="createTag(stageManager.getStage());">付箋召喚</button>
   <button type=button onclick="stageManager.pushStageData()">データプッシュ</button>
   <button type=button onclick="stageManager.syncStageDataFromServer();">データプル</button>
   <div class="row">
