@@ -13,12 +13,14 @@ var StageManager = (function(){
       dataType: 'json',
       context: this,
     }).done( function(data, status, xhr){
+      var canvasData = data.canvasData;
+      var canvasDrawHistories = data.canvasDrawHistories;
       //stage regenerate
       var stageScale = this.stage.getScale();
       this.stage.destroy();
-      this.stage = Konva.Node.create(data.stage, 'container');
+      this.stage = Konva.Node.create(canvasData.stage, 'container');
       this.stage.scale(stageScale);
-      imageData = JSON.parse(data.images);
+      imageData = JSON.parse(canvasData.images);
       //apply image for all konvaImage
       this.stage.find('Image').each(function(konvaImage){
         var imageObj = new Image();
@@ -41,6 +43,12 @@ var StageManager = (function(){
         	  break;
           default:
           }
+          $.each(canvasDrawHistories,function(i, data){
+        	if(konvaImage.getId() == data.targetId){
+    			drawLine(konvaImage, {x: data.fromX, y: data.fromY}, {x: data.toX, y: data.toY},
+    					data.mode, data.color, data.lineWidth);
+        	}  
+          });
         }
         imageObj.src = imageData[konvaImage.getId()];
       });

@@ -4,9 +4,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.gmo.ojt.chachat.bean.CanvasDataResult;
 import jp.gmo.ojt.chachat.domain.model.CanvasData;
+import jp.gmo.ojt.chachat.domain.model.CanvasDrawHistory;
 import jp.gmo.ojt.chachat.domain.model.CanvasIdentity;
 import jp.gmo.ojt.chachat.domain.service.CanvasDataService;
+import jp.gmo.ojt.chachat.domain.service.CanvasDrawHistoryService;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -20,10 +25,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class CanvasDataController {
 	@Autowired
 	CanvasDataService canvasDataService;
+	@Autowired
+	CanvasDrawHistoryService canvasDrawHistoryService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public CanvasData getCanvasData(@PathVariable("roomId") String roomId, @PathVariable("canvasId") Integer canvasId) {
-		return canvasDataService.getCanvasData(roomId, canvasId);
+	public CanvasDataResult getCanvasData(@PathVariable("roomId") String roomId, @PathVariable("canvasId") Integer canvasId) {
+		CanvasData canvasData = canvasDataService.getCanvasData(roomId, canvasId);
+		List<CanvasDrawHistory> canvasDrawHistories = canvasDrawHistoryService.getAfterHistoriesByDate(new CanvasIdentity(roomId,canvasId), canvasData.getUpdatedAt());
+		return new CanvasDataResult(canvasData,canvasDrawHistories);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
