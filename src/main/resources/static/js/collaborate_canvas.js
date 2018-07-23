@@ -88,6 +88,50 @@ var CanvasUtil = (function() {
   return CanvasUtil
 })();
 
+
+var CanvasStompClient = (function(){
+	var CanvasStompClient = function(){
+		var env = location.pathname.match(/(.+)rooms\/(\w+)\/chachat/);
+		this.baseUrl = env[1];
+		this.roomId = env[2];
+		this.canvasId = 1;
+		this.subscription = null;
+		var socket = new SockJS(this.baseUrl +'stomp');
+	    this.client = Stomp.over(socket);
+	    this.client.connect({}, $.proxy(function (frame) {
+	        console.log('Connected: ' + frame);
+	        this.subscribe(this.canvasId);
+	    }, this));
+	}
+	CanvasStompClient.prototype.subscribe = function(canvasId){
+		if(this.subscription != null){
+		  this.subscription.unsubscribe();
+		}
+		this.canvasId = canvasId;
+		console.log('/history/draw/rooms/' +this.roomId+ '/canvas/' +this.canvasId);
+		this.subscription = this.client.subscribe('/history/draw/rooms/' +this.roomId+ '/canvas/' +this.canvasId, function (response) {
+			var data = JSON.parse(response.body);
+			drawLine(stageManager.getStage().findOne('#'+data.targetId),
+					{x: data.fromX, y: data.fromY}, {x: data.toX, y: data.toY},
+					data.mode, data.color, data.lineWidth);
+        });
+	}
+	CanvasStompClient.prototype.sendDrawData = function(targetId,fromPosition, toPosition, mode,color,lineWidth){
+		console.log('/ws/rooms/' +this.roomId+ '/canvas/' +this.canvasId+ '/draw');
+		this.client.send('/ws/rooms/' +this.roomId+ '/canvas/' +this.canvasId+ '/draw', {}, JSON.stringify({
+			targetId: targetId,
+			mode: mode,
+			color: color,
+			lineWidth: lineWidth,
+			fromX: fromPosition.x,
+			fromY: fromPosition.y,
+			toX: toPosition.x,
+			toY: toPosition.y}));
+	}
+	return CanvasStompClient;
+})();
+
+
 var stageSize = {
   width: 1120,
   height: 630
@@ -108,7 +152,6 @@ var stage = new Konva.Stage({
 });
 
 stageManager = new StageManager(stage);
-
 var createLowestLayer = function (stage){
   var lowestLayer = new Konva.Layer({id: 'lowestLayer'});
   stage.add(lowestLayer);
@@ -130,36 +173,30 @@ var mode = 'brush';
 var isPaint = false;
 var lastPointerPosition;
 
+var drawLine = function (konvaImage,fromPosition,toPosition,mode,color,lineWidth){
+	var context = konvaImage.getImage().getContext('2d');
+	context.strokeStyle = color;
+	context.lineJoin = "round";
+	context.lineWidth = lineWidth;
+	if (mode === 'brush') {
+	  context.globalCompositeOperation = 'source-over';
+	}
+	if (mode === 'eraser') {
+	  context.globalCompositeOperation = 'destination-out';
+	}
+	context.beginPath();
+	context.moveTo(fromPosition.x - konvaImage.x() - konvaImage.parent.x(), fromPosition.y - konvaImage.y() - konvaImage.parent.y());
+	context.lineTo(toPosition.x - konvaImage.x() - konvaImage.parent.x(), toPosition.y - konvaImage.y() - konvaImage.parent.y());
+	context.closePath();
+	context.stroke();
+
+	konvaImage.findAncestor('Layer').batchDraw();
+};
+
 var drawLineToCurrentPointerPosition = function (konvaImage, lastPointerPosition){
-  var context = konvaImage.getImage().getContext('2d');
-  context.strokeStyle = "#df4b26";
-  context.lineJoin = "round";
-  context.lineWidth = 5;
-  if (mode === 'brush') {
-    context.globalCompositeOperation = 'source-over';
-    context.lineWidth = 5;
-  }
-  if (mode === 'eraser') {
-    context.globalCompositeOperation = 'destination-out';
-    context.lineWidth = 30;
-  }
-  context.beginPath();
-
-  var localPos = {
-    x: lastPointerPosition.x - konvaImage.x() - konvaImage.parent.x(),
-    y: lastPointerPosition.y - konvaImage.y() - konvaImage.parent.y()
-  };
-  context.moveTo(localPos.x, localPos.y);
-  var pos = canvasUtil.getCurrentCanvasPointerPosition(stageManager.getStage());
-  localPos = {
-    x: pos.x - konvaImage.x() - konvaImage.parent.x(),
-    y: pos.y - konvaImage.y() - konvaImage.parent.y()
-  };
-  context.lineTo(localPos.x, localPos.y);
-  context.closePath();
-  context.stroke();
-
-  konvaImage.findAncestor('Layer').batchDraw();
+	var currentPosition = canvasUtil.getCurrentCanvasPointerPosition(stageManager.getStage());
+	drawLine(konvaImage, lastPointerPosition, currentPosition, mode,'#df4b26',10);
+	canvasStompClient.sendDrawData(konvaImage.getId(),lastPointerPosition, currentPosition, mode,'#df4b26',10);
 }
 
 var registLowestLayerImageEvent = function (lowestLayerImage){
@@ -315,3 +352,5 @@ var createTag = function(stage) {
 $('#tool').on('change', function() {
   mode = this.value;
 });
+
+var canvasStompClient = new CanvasStompClient();
