@@ -151,6 +151,10 @@ var CanvasStompClient = (function(){
 			if(data.user === this.user){
 				return;
 			}
+			var group = stageManager.getStage().findOne('#'+data.targetId).findAncestor('Group');
+			group.x(data.x);
+			group.y(data.y);
+			group.findAncestor('Layer').batchDraw();
         },this));
 		this.subscription = this.client.subscribe('/history/object/delete/rooms/' +this.roomId+ '/canvas/' +this.canvasId, $.proxy(function (response) {
 			var data = JSON.parse(response.body);
@@ -179,6 +183,13 @@ var CanvasStompClient = (function(){
 			objectType: objectType,
 			x: createdObject.x(),
 			y: createdObject.y()}));
+	}
+	CanvasStompClient.prototype.sendObjectMoveHistory = function(movedObject){
+		this.client.send('/ws/rooms/' +this.roomId+ '/canvas/' +this.canvasId+ '/object/move', {}, JSON.stringify({
+			user: this.user,
+			targetId: movedObject.findOne('.tagDrawableNode').getId(),
+			x: movedObject.x(),
+			y: movedObject.y()}));
 	}
 	return CanvasStompClient;
 })();
@@ -348,11 +359,15 @@ var registTagEvent = function(tagGroup) {
 	     drawLineOnTag();
 	     lastTagPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stageManager.getStage());
 	   });
+	   tagGroup.on('dragmove', function(e){
+		   canvasStompClient.sendObjectMoveHistory(tagGroup);
+	   });
 }
 
 var createTag = function(stage) {
    var tagHeight = 200;
    var tagWidth = 200;
+   var tagId = 'tag-' + new Date().getTime().toString(16)  + Math.floor(1000*Math.random()).toString(16);
 
    var tagLayer = new Konva.Layer();
    stage.add(tagLayer);
@@ -385,7 +400,6 @@ var createTag = function(stage) {
    var tagCanvas = document.createElement('canvas');
    tagCanvas.width = tagWidth;
    tagCanvas.height = tagHeight;
-   var tagId = 'tag-' + new Date().getTime().toString(16)  + Math.floor(1000*Math.random()).toString(16);
    var drawableNode = new Konva.Image({
        image: tagCanvas,
        stroke: 'khaki',
