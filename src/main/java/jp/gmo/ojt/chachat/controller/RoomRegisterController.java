@@ -8,11 +8,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jp.gmo.ojt.chachat.domain.model.Room;
 import jp.gmo.ojt.chachat.domain.service.RoomService;
-//import jp.gmo.ojt.chachat.bean.RoomRegistResult;
 import jp.gmo.ojt.chachat.form.RegistForm;
 import jp.gmo.ojt.chachat.util.RoomUtility;
 
@@ -38,8 +37,7 @@ public class RoomRegisterController {
 	@RequestMapping(method = RequestMethod.POST)
 	// @ResponseBody
 	public String register(@Validated RegistForm form, BindingResult bindingResult, Model model) {
-
-		
+		ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentRequest();
 		room.setRoomName(form.getRoomName());
 		
 		// aaルーム名がからのときエラー文
@@ -48,9 +46,13 @@ public class RoomRegisterController {
 			return "room_register.html";
 		}
 		model.addAttribute("valid_error", "0");	
-		roomService.registRoom(room);
-		model.addAttribute("url", RoomUtility.makeRoomId(form.getRoomName()));
 
+		roomService.registRoom(room);
+		model.addAttribute("url",builder.toUriString() 
+								+ "rooms/" 
+								+ RoomUtility.makeRoomId(form.getRoomName()) 
+								+ "/");
+		
 		return "room_register.html";
 	}
 }
