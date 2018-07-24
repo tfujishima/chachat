@@ -10,7 +10,7 @@ import jp.gmo.ojt.chachat.domain.model.CanvasDrawHistory;
 import jp.gmo.ojt.chachat.domain.model.CanvasIdentity;
 
 @Repository
-public interface CanvasHistoryRepository<E> extends JpaRepository<CanvasDrawHistory, CanvasIdentity>{
+public interface CanvasHistoryRepository<E> extends JpaRepository<E, CanvasIdentity>{
 	List<E> findByCanvasIdentity(CanvasIdentity canvasIdentity);
 	List<E> findByCanvasIdentityAndCreatedAtBefore(CanvasIdentity canvasIdentity,Date date);
 	List<E> findByCanvasIdentityAndCreatedAtAfter(CanvasIdentity canvasIdentity,Date date);

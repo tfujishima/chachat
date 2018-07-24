@@ -27,8 +27,8 @@ public class CanvasHistoryService<E> {
 		return canvasHistoryRepository.findByCanvasIdentityAndCreatedAtBefore(canvasIdentity, date);
 	}
 	
-	public void saveCanvasDrawHistory(CanvasDrawHistory canvasDrawHistory) {
-		canvasHistoryRepository.save(canvasDrawHistory);
+	public void saveHistory(E canvasHistory) {
+		canvasHistoryRepository.save(canvasHistory);
 	}
 	
 	public void deleteBeforeHistoriesByDate(CanvasIdentity canvasIdentity, Date date){

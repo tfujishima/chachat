@@ -19,7 +19,7 @@ public class CanvasDrawHistoryController {
     @SendTo("/history/draw/rooms/{roomId}/canvas/{canvasId}")
     public CanvasDrawHistory shareDrawHistories(@DestinationVariable("roomId") String roomId, @DestinationVariable("canvasId") Integer canvasId, CanvasDrawHistory canvasDrawHistory) throws Exception {
 		canvasDrawHistory.setCanvasIdentity(new CanvasIdentity(roomId, canvasId));
-		canvasDrawHistoryService.saveCanvasDrawHistory(canvasDrawHistory);
+		canvasDrawHistoryService.saveHistory(canvasDrawHistory);
         return canvasDrawHistory;
     }
 }
