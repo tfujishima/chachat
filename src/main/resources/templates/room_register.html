@@ -17,7 +17,7 @@
 				<!-- <img alt="test" th:src="@{/img/Desert.jpg}"> -->
 			</div>
 		</div>
-		<form th:object="${registForm}" action="/" method="post">
+		<form th:object="${registForm}" th:action="@{/}" method="post">
 			<div class="row">
 				<div class="col-sm-4">ルームネームを入れてね</div>
 				<div class="col-sm-8">
