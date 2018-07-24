@@ -15,6 +15,9 @@ var StageManager = (function(){
     }).done( function(data, status, xhr){
       var canvasData = data.canvasData;
       var canvasDrawHistories = data.canvasDrawHistories;
+      var canvasObjectCreatedHistories = data.canvasObjectCreatedHistories;
+      var canvasObjectMovedHistories = data.canvasObjectMovedHistories;
+      var canvasObjectDeletedHistories = data.canvasObjectDeletedHistories;
       //stage regenerate
       if(canvasData == null){
     	  this.pushStageData();
