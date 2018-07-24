@@ -32,7 +32,7 @@ public class RoomLoginController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(@PathVariable("roomId") String roomId, Model model) {
-		Optional<Room> rooms = roomService.serchRoomId(roomId);
+		Optional<Room> rooms = roomService.searchRoomId(roomId);
 		if (rooms.equals(Optional.empty())) {
 			return "404";
 		} else {
