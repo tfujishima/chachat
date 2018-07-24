@@ -31,7 +31,12 @@ public class CanvasDataController {
 	@RequestMapping(method=RequestMethod.GET)
 	public CanvasDataResult getCanvasData(@PathVariable("roomId") String roomId, @PathVariable("canvasId") Integer canvasId) {
 		CanvasData canvasData = canvasDataService.getCanvasData(roomId, canvasId);
-		List<CanvasDrawHistory> canvasDrawHistories = canvasDrawHistoryService.getAfterHistoriesByDate(new CanvasIdentity(roomId,canvasId), canvasData.getUpdatedAt());
+		List<CanvasDrawHistory> canvasDrawHistories;
+		if(canvasData == null) {
+			canvasDrawHistories = canvasDrawHistoryService.getHistories(new CanvasIdentity(roomId,canvasId));
+		}else {
+			canvasDrawHistories = canvasDrawHistoryService.getAfterHistoriesByDate(new CanvasIdentity(roomId,canvasId), canvasData.getUpdatedAt());
+		}
 		return new CanvasDataResult(canvasData,canvasDrawHistories);
 	}
 	
