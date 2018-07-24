@@ -9,7 +9,7 @@ import jp.gmo.ojt.chachat.domain.model.CanvasData;
 import jp.gmo.ojt.chachat.domain.model.CanvasDrawHistory;
 import jp.gmo.ojt.chachat.domain.model.CanvasIdentity;
 import jp.gmo.ojt.chachat.domain.service.CanvasDataService;
-import jp.gmo.ojt.chachat.domain.service.CanvasDrawHistoryService;
+import jp.gmo.ojt.chachat.domain.service.CanvasHistoryService;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class CanvasDataController {
 	@Autowired
 	CanvasDataService canvasDataService;
 	@Autowired
-	CanvasDrawHistoryService canvasDrawHistoryService;
+	CanvasHistoryService<CanvasDrawHistory> canvasDrawHistoryService;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public CanvasDataResult getCanvasData(@PathVariable("roomId") String roomId, @PathVariable("canvasId") Integer canvasId) {
