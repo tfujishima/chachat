@@ -110,6 +110,7 @@ var CanvasStompClient = (function(){
 		this.baseUrl = env[1];
 		this.roomId = env[2];
 		this.canvasId = 1;
+		this.user = 'user-' + new Date().getTime().toString(16)  + Math.floor(1000*Math.random()).toString(16);
 		this.subscription = null;
 		var socket = new SockJS(this.baseUrl +'stomp');
 	    this.client = Stomp.over(socket);
@@ -124,16 +125,21 @@ var CanvasStompClient = (function(){
 		}
 		this.canvasId = canvasId;
 		console.log('/history/draw/rooms/' +this.roomId+ '/canvas/' +this.canvasId);
-		this.subscription = this.client.subscribe('/history/draw/rooms/' +this.roomId+ '/canvas/' +this.canvasId, function (response) {
+		this.subscription = this.client.subscribe('/history/draw/rooms/' +this.roomId+ '/canvas/' +this.canvasId, $.proxy(function (response) {
 			var data = JSON.parse(response.body);
+			if(data.user === this.user){
+				return;
+			}
+			console.log("draw");
 			drawLine(stageManager.getStage().findOne('#'+data.targetId),
 					{x: data.fromX, y: data.fromY}, {x: data.toX, y: data.toY},
 					data.mode, data.color, data.lineWidth);
-        });
+        },this));
 	}
 	CanvasStompClient.prototype.sendDrawData = function(targetId,fromPosition, toPosition, mode,color,lineWidth){
 		console.log('/ws/rooms/' +this.roomId+ '/canvas/' +this.canvasId+ '/draw');
 		this.client.send('/ws/rooms/' +this.roomId+ '/canvas/' +this.canvasId+ '/draw', {}, JSON.stringify({
+			user: this.user,
 			targetId: targetId,
 			mode: mode,
 			color: color,

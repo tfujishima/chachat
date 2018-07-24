@@ -25,6 +25,8 @@ public abstract class CanvasHistory implements Serializable {
 	@Embedded
     private CanvasIdentity canvasIdentity;
 	@NotBlank
+	private String user;
+	@NotBlank
 	private String targetId;
     @NotNull
     private Date createdAt;
@@ -49,6 +51,12 @@ public abstract class CanvasHistory implements Serializable {
 	}
 	public void setCanvasId(Integer canvasId) {
 		this.canvasIdentity.setCanvasId(canvasId);
+	}
+	public String getUser() {
+		return this.user;
+	}
+	public void setUser(String user) {
+		this.user = user;
 	}
 	public String  getTargetId() {
 		return this.targetId;
