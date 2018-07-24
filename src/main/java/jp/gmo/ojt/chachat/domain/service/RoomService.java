@@ -24,4 +24,8 @@ public class RoomService {
 		room.setRoomId(roomId);
 		roomRepository.save(room);
 	}
+	
+	public Optional<Room> searchRoomId(String roomId) {
+		return roomRepository.findById(roomId);
+	}
 }

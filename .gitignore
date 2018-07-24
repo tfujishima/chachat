@@ -4,6 +4,7 @@ bin/
 !gradle/wrapper/gradle-wrapper.jar
 
 application-*.properties
+WEB-INF/
 
 ### STS ###
 .apt_generated
