@@ -16,6 +16,13 @@ var StageManager = (function(){
       var canvasData = data.canvasData;
       var canvasDrawHistories = data.canvasDrawHistories;
       //stage regenerate
+      if(canvasData == null){
+    	  this.pushStageData();
+    	  setTimeout($.proxy(function(){
+    		  this.syncStageDataFromServer();
+    	  },this),1000);
+    	  return;
+      }
       var stageScale = this.stage.getScale();
       this.stage.destroy();
       this.stage = Konva.Node.create(canvasData.stage, 'container');
