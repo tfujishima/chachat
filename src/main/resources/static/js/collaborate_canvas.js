@@ -130,10 +130,33 @@ var CanvasStompClient = (function(){
 			if(data.user === this.user){
 				return;
 			}
-			console.log("draw");
 			drawLine(stageManager.getStage().findOne('#'+data.targetId),
 					{x: data.fromX, y: data.fromY}, {x: data.toX, y: data.toY},
 					data.mode, data.color, data.lineWidth);
+        },this));
+		this.subscription = this.client.subscribe('/history/object/create/rooms/' +this.roomId+ '/canvas/' +this.canvasId, $.proxy(function (response) {
+			var data = JSON.parse(response.body);
+			if(data.user === this.user){
+				return;
+			}
+			if(data.objectType === "tag"){
+				var tag = createTag(stageManager.getStage());
+				tag.position({x: data.x,y: data.y});
+				tag.findOne('.tagDrawableNode').id(data.targetId);
+				tag.findAncestor('Layer').batchDraw();
+			}
+        },this));
+		this.subscription = this.client.subscribe('/history/object/move/rooms/' +this.roomId+ '/canvas/' +this.canvasId, $.proxy(function (response) {
+			var data = JSON.parse(response.body);
+			if(data.user === this.user){
+				return;
+			}
+        },this));
+		this.subscription = this.client.subscribe('/history/object/delete/rooms/' +this.roomId+ '/canvas/' +this.canvasId, $.proxy(function (response) {
+			var data = JSON.parse(response.body);
+			if(data.user === this.user){
+				return;
+			}
         },this));
 	}
 	CanvasStompClient.prototype.sendDrawData = function(targetId,fromPosition, toPosition, mode,color,lineWidth){
@@ -148,6 +171,14 @@ var CanvasStompClient = (function(){
 			fromY: fromPosition.y,
 			toX: toPosition.x,
 			toY: toPosition.y}));
+	}
+	CanvasStompClient.prototype.sendObjectCreateHistory = function(objectType, createdObject){
+		this.client.send('/ws/rooms/' +this.roomId+ '/canvas/' +this.canvasId+ '/object/create', {}, JSON.stringify({
+			user: this.user,
+			targetId: createdObject.findOne('.tagDrawableNode').getId(),
+			objectType: objectType,
+			x: createdObject.x(),
+			y: createdObject.y()}));
 	}
 	return CanvasStompClient;
 })();
@@ -188,6 +219,7 @@ var createLowestLayer = function (stage){
   });
   lowestLayer.add(lowestLayerImage);
   stage.batchDraw();
+  return lowestLayer;
 }
 
 var mode = 'brush';
@@ -368,6 +400,7 @@ var createTag = function(stage) {
    tagLayer.add(group);
    registTagEvent(group);
    tagLayer.batchDraw();
+   return group;
 }
 
 $('#tool').on('change', function() {
@@ -376,3 +409,9 @@ $('#tool').on('change', function() {
 
 stageManager.syncStageDataFromServer();
 var canvasStompClient = new CanvasStompClient();
+
+
+$('#create-tag').on('click', function() {
+	var tag = createTag(stageManager.getStage());
+	canvasStompClient.sendObjectCreateHistory("tag", tag);
+});
