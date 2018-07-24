@@ -6,7 +6,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import jp.gmo.ojt.chachat.domain.model.CanvasDrawHistory;
 import jp.gmo.ojt.chachat.domain.model.CanvasIdentity;
 import jp.gmo.ojt.chachat.domain.model.CanvasObjectCreatedHistory;
 import jp.gmo.ojt.chachat.domain.model.CanvasObjectDeletedHistory;
