@@ -1,5 +1,6 @@
 /* ‹¤’Ê */
 body {
+	color: #f5385e;
 	background-color: #89e5c1;
 	font-family: "ƒqƒ‰ƒMƒmŠÛƒS Pro W4", "ƒqƒ‰ƒMƒmŠÛƒS Pro", "Hiragino Maru Gothic Pro",
 		"ƒqƒ‰ƒMƒmŠpƒS Pro W3", "Hiragino Kaku Gothic Pro", "HGŠÛºŞ¼¯¸M-PRO",
@@ -80,8 +81,7 @@ input {
 .ok-btn {
 	font-weight: bold;
 	font-size: 2rem;
-	font-family: 'Chango', cursive;
-	
+	/* font-family: 'Chango', cursive; */
 }
 
 .clear-box {
