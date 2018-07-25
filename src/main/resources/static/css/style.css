@@ -36,6 +36,7 @@ body {
 	font-family: "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro W4", "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro", "Hiragino Maru Gothic Pro",
 		"繝偵Λ繧ｮ繝手ｧ偵ざ Pro W3", "Hiragino Kaku Gothic Pro", "HG荳ｸ�ｽｺ�ｾ橸ｽｼ�ｽｯ�ｽｸM-PRO",
 		"HGMaruGothicMPRO";
+		color:#f5385e;
 }
 a:link { color:#f5385e; text-decoration:none }
 a:visited { color:#f5385e; text-decoration:none }
@@ -227,8 +228,10 @@ input {
 	box-shadow: none;
 	padding: 2rem 8px;
 	text-align: center;
+}
 	
 
 .share-btn {
 	width: 5%;
 	margin: 0.5rem 0.5rem 0.5rem 0;
+}
