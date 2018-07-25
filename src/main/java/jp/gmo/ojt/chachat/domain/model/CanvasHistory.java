@@ -8,20 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.lang.reflect.ParameterizedType;
-import lombok.Data;
-//@MappedSuperclass
 @Entity
 @SuppressWarnings("serial")
-public abstract class CanvasHistory<E extends CanvasHistory> implements Serializable {
+public abstract class CanvasHistory  implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	@NotNull
 	@Embedded
     private CanvasIdentity canvasIdentity;

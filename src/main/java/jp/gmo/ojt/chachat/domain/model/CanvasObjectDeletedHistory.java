@@ -9,6 +9,6 @@ import lombok.Data;
 @Entity
 @Table(name="canvas_object_deleted_histories")
 @SuppressWarnings("serial")
-public class CanvasObjectDeletedHistory extends CanvasHistory<CanvasObjectDeletedHistory>{
+public class CanvasObjectDeletedHistory extends CanvasHistory{
 
 }

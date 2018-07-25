@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 @Table(name="canvas_object_created_histories")
 @SuppressWarnings("serial")
-public class CanvasObjectCreatedHistory extends CanvasHistory<CanvasObjectCreatedHistory>{
+public class CanvasObjectCreatedHistory extends CanvasHistory{
 	@NotBlank
 	private String objectType;
 	@NotNull

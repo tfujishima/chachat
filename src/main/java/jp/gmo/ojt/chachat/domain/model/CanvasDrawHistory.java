@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 @Table(name="canvas_draw_histories")
 @SuppressWarnings("serial")
-public class CanvasDrawHistory extends CanvasHistory<CanvasDrawHistory>{
+public class CanvasDrawHistory extends CanvasHistory{
 	@NotBlank
 	private String mode;
 	@NotBlank
