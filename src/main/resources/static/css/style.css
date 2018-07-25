@@ -1,5 +1,12 @@
-.end_img{
+.end_otsu{
+	width:300px;
+	position: absolute;
+		left:20%
+}
+
+.end_top{
 	text-align: center;
+	width:50px
 }
 
 .kakugen_title {
@@ -8,8 +15,18 @@
 	}
 	
 .kakugen_text {
-	text-align: center;
 	font-size: 30pt;
 	font-weight: bold;
+	text-align: center;
+	position: absolute;
+	  top: 0px;
+	  right: 0px;
+	  bottom: 0px;
+	  left: 0px;
+	  margin: auto;
+	
+	  width: 1200px;
+	  height: 64px;
+	
 	
 	}
