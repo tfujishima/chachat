@@ -24,7 +24,7 @@ public class ChatchatRoomEndController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
-		return "chachat_end.html";
+		return "chachat_end";
 	}
 
 	@ModelAttribute
