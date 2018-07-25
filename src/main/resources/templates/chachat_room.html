@@ -10,6 +10,7 @@
 <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
 </head>
 <body>
+<input id="userNameHidden" type="hidden" th:value="|${session['userName']}|" readonly ></input>
 	ツール的何か：
 	<select id="tool">
 		<option value="brush">ペンモード</option>
@@ -48,14 +49,26 @@
 		</div>
 	</div>
 
-	<p>chachat room page</p>
 	<!-- chat is here -->
+  <div class="row">
+   <textarea id="message-history" cols=100 rows=5 readonly style="overflow: hidden;resize: none;"></textarea> 
+    </div>
+  <div class="row">
+  <form class="form-inline" id="chat-form">
+    <div class="form-group">
+    <label for="message" class="sr-only">chat</label>
+    <input type="text" class="form-control" id="message" placeholder="input here">
+  </div>
+  <button type="submit" id="send-message-button" class="btn btn-default">送信</button>
+  </form>
+  </div>
 	<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
 	<script th:src="@{/webjars/konva/2.1.7/konva.min.js}"></script>
 	<script th:src="@{/webjars/stomp-websocket/2.3.3-1/stomp.min.js}"></script>
 	<script th:src="@{/webjars/sockjs-client/1.1.5/dist/sockjs.min.js}"></script>
 	<script src="/js/collaborate_canvas.js"
 		th:src="@{/js/collaborate_canvas.js}"></script>
+  <script src="/js/collaborate_chat.js" th:src="@{/js/collaborate_chat.js}"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
