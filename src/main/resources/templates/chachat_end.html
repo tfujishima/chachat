@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
-<header>
-
-</header>
 <head>
   <meta charset="UTF-8">
   <title>Chachat</title>
-  <link class="end_img" href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+  <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+  <link href="/js/kakugen.js" th:href="@{/js/kakugen.js}"></link>
+  
+  
 </head>
+
+
 <body>
   <h3>おっけーおつかれさんです</h3>
-  <img src=https://static.tvtropes.org/pmwiki/pub/images/RichieRich.jpeg>
+  
+  <img alt="otsu.png" th:src="@{/image/otsu.png}" class="end_img"></img>
+  
   <p class="kakugen_title">本日の格言</p>
-  <p class="kakugen_text">""</p>
+  
+  <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+  <p class="kakugen_text">
+  <script src="/js/kakugen.js" th:src="@{/js/kakugen.js}"></script>
+  </p>
+  
+  <img alt="top.png" th:src="@{/img/top.png}">
   
 </body>
 </html>
