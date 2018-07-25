@@ -31,7 +31,6 @@
     width: 90px;
     height: 60px;
 }
-/* 蜈ｱ騾� */
 body {
 	background-color: #89e5c1;
 	font-family: "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro W4", "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro", "Hiragino Maru Gothic Pro",
@@ -64,6 +63,7 @@ input {
 #url-area {
 	
 }
+
 
 /* 謚ｼ縺励◆諢溘�ｮ縺ゅｋ繝懊ち繝ｳ */
 .square_btn {
@@ -113,6 +113,8 @@ input {
 .square_btn:active:after, .square_btn:active:before {
 	content: none; /*繝懊ち繝ｳ繧呈款縺吶→邱壹′豸医∴繧�*/
 }
+
+
 
 .square_btn_modal_yes {
 	display: inline-block;
@@ -225,4 +227,8 @@ input {
 	box-shadow: none;
 	padding: 2rem 8px;
 	text-align: center;
-}
+	
+
+.share-btn {
+	width: 5%;
+	margin: 0.5rem 0.5rem 0.5rem 0;
