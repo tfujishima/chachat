@@ -1,0 +1,95 @@
+/* ‹¤’Ê */
+body {
+	background-color: #89e5c1;
+	font-family: "ƒqƒ‰ƒMƒmŠÛƒS Pro W4", "ƒqƒ‰ƒMƒmŠÛƒS Pro", "Hiragino Maru Gothic Pro",
+		"ƒqƒ‰ƒMƒmŠpƒS Pro W3", "Hiragino Kaku Gothic Pro", "HGŠÛºŞ¼¯¸M-PRO",
+		"HGMaruGothicMPRO";
+}
+
+input {
+	background-color: #eeeeee;
+}
+
+.text {
+	
+}
+
+/* ˜g‚²‚Æ */
+#title-area {
+	margin-top: 20%;
+	text-align: center;
+}
+
+#form {
+	
+}
+
+#url-area {
+	
+}
+
+/* ‰Ÿ‚µ‚½Š´‚Ì‚ ‚éƒ{ƒ^ƒ“ */
+.square_btn {
+	display: inline-block;
+	position: relative;
+	padding: 0.1em 1em;
+	text-decoration: none;
+	background: #ffabbc; /*ƒ{ƒ^ƒ“F*/
+	color: #f5385e;
+	border-bottom: solid 5px #ef1a49; /*ƒ{ƒ^ƒ“F‚æ‚èˆÃ‚ß‚É*/
+	border-right: solid 5px #f5385e; /*ƒ{ƒ^ƒ“F‚æ‚èˆÃ‚ß‚É*/
+}
+
+.square_btn:before {
+	content: " ";
+	position: absolute;
+	bottom: -5px;
+	left: -1px;
+	width: 0;
+	height: 0;
+	border-width: 0 6px 6px 0px;
+	border-style: solid;
+	border-color: transparent;
+	border-bottom-color: #89e5c1; /*”wŒi—‡‚í‚¹‚é */
+}
+
+.square_btn:after {
+	content: " ";
+	position: absolute;
+	top: -1px;
+	right: -5px;
+	width: 0;
+	height: 0;
+	border-width: 0px 6px 6px 0px;
+	border-style: solid;
+	border-color: #89e5c1;
+	border-bottom-color: transparent;
+}
+
+.square_btn:active { /*ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«*/
+	border: none;
+	-ms-transform: translate(6px, 6px);
+	-webkit-transform: translate(6px, 6px);
+	transform: translate(6px, 6px);
+}
+
+.square_btn:active:after, .square_btn:active:before {
+	content: none; /*ƒ{ƒ^ƒ“‚ğ‰Ÿ‚·‚Æü‚ªÁ‚¦‚é*/
+}
+
+.ok-btn {
+	font-weight: bold;
+	font-size: 2rem;
+}
+
+.clear-box {
+	background-color: transparent;
+}
+
+.round-input {
+	border: none;
+	border-radius: 100px;
+	box-shadow: none;
+	padding: 2rem 8px;
+	text-align: center;
+}
