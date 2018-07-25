@@ -1,8 +1,41 @@
-/* ‹¤’Ê */
+.end_otsu{
+	width:300px;
+	position:relative;
+		left:20%
+}
+
+.kakugen_title {
+	text-align: center;
+	font-size: 20pt;
+	}
+	
+.kakugen_text {
+	font-size: 30pt;
+	font-weight: bold;
+	text-align: center;
+	position: relative;
+	  top: 0px;
+	  right: 0px;
+	  bottom: 0px;
+	  left: 0px;
+	  margin: auto;
+	
+	  width: 1200px;
+	
+	}
+	
+.end_top{
+	position: relative;
+    bottom: 0px;
+    left: 70%;
+    width: 90px;
+    height: 60px;
+}
+/* å…±é€š */
 body {
 	background-color: #89e5c1;
-	font-family: "ƒqƒ‰ƒMƒmŠÛƒS Pro W4", "ƒqƒ‰ƒMƒmŠÛƒS Pro", "Hiragino Maru Gothic Pro",
-		"ƒqƒ‰ƒMƒmŠpƒS Pro W3", "Hiragino Kaku Gothic Pro", "HGŠÛºŞ¼¯¸M-PRO",
+	font-family: "ãƒ’ãƒ©ã‚®ãƒä¸¸ã‚´ Pro W4", "ãƒ’ãƒ©ã‚®ãƒä¸¸ã‚´ Pro", "Hiragino Maru Gothic Pro",
+		"ãƒ’ãƒ©ã‚®ãƒè§’ã‚´ Pro W3", "Hiragino Kaku Gothic Pro", "HGä¸¸ï½ºï¾ï½¼ï½¯ï½¸M-PRO",
 		"HGMaruGothicMPRO";
 }
 
@@ -14,7 +47,7 @@ input {
 	
 }
 
-/* ˜g‚²‚Æ */
+/* æ ã”ã¨ */
 #title-area {
 	margin-top: 20%;
 	text-align: center;
@@ -28,16 +61,16 @@ input {
 	
 }
 
-/* ‰Ÿ‚µ‚½Š´‚Ì‚ ‚éƒ{ƒ^ƒ“ */
+/* æŠ¼ã—ãŸæ„Ÿã®ã‚ã‚‹ãƒœã‚¿ãƒ³ */
 .square_btn {
 	display: inline-block;
 	position: relative;
 	padding: 0.1em 1em;
 	text-decoration: none;
-	background: #ffabbc; /*ƒ{ƒ^ƒ“F*/
+	background: #ffabbc; /*ãƒœã‚¿ãƒ³è‰²*/
 	color: #f5385e;
-	border-bottom: solid 5px #ef1a49; /*ƒ{ƒ^ƒ“F‚æ‚èˆÃ‚ß‚É*/
-	border-right: solid 5px #f5385e; /*ƒ{ƒ^ƒ“F‚æ‚èˆÃ‚ß‚É*/
+	border-bottom: solid 5px #ef1a49; /*ãƒœã‚¿ãƒ³è‰²ã‚ˆã‚Šæš—ã‚ã«*/
+	border-right: solid 5px #f5385e; /*ãƒœã‚¿ãƒ³è‰²ã‚ˆã‚Šæš—ã‚ã«*/
 }
 
 .square_btn:before {
@@ -50,7 +83,7 @@ input {
 	border-width: 0 6px 6px 0px;
 	border-style: solid;
 	border-color: transparent;
-	border-bottom-color: #89e5c1; /*”wŒi—‡‚í‚¹‚é */
+	border-bottom-color: #89e5c1; /*èƒŒæ™¯ä¼¼åˆã‚ã›ã‚‹ */
 }
 
 .square_btn:after {
@@ -66,7 +99,7 @@ input {
 	border-bottom-color: transparent;
 }
 
-.square_btn:active { /*ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«*/
+.square_btn:active { /*ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã¨ã*/
 	border: none;
 	-ms-transform: translate(6px, 6px);
 	-webkit-transform: translate(6px, 6px);
@@ -74,7 +107,7 @@ input {
 }
 
 .square_btn:active:after, .square_btn:active:before {
-	content: none; /*ƒ{ƒ^ƒ“‚ğ‰Ÿ‚·‚Æü‚ªÁ‚¦‚é*/
+	content: none; /*ãƒœã‚¿ãƒ³ã‚’æŠ¼ã™ã¨ç·šãŒæ¶ˆãˆã‚‹*/
 }
 
 .ok-btn {
