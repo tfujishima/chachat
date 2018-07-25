@@ -38,6 +38,10 @@ body {
 		"繝偵Λ繧ｮ繝手ｧ偵ざ Pro W3", "Hiragino Kaku Gothic Pro", "HG荳ｸ�ｽｺ�ｾ橸ｽｼ�ｽｯ�ｽｸM-PRO",
 		"HGMaruGothicMPRO";
 }
+a:link { color:#f5385e; text-decoration:none }
+a:visited { color:#f5385e; text-decoration:none }
+a:hover { color:#f5385e; text-decoration:none }
+a:active { color:#f5385e; text-decoration:none }
 
 input {
 	background-color: #eeeeee;
