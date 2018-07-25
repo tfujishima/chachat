@@ -31,4 +31,98 @@
     width: 90px;
     height: 60px;
 }
+/* 共通 */
+body {
+	background-color: #89e5c1;
+	font-family: "ヒラギノ丸ゴ Pro W4", "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro",
+		"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "HG丸ｺﾞｼｯｸM-PRO",
+		"HGMaruGothicMPRO";
+}
+
+input {
+	background-color: #eeeeee;
+}
+
+.text {
+	
+}
+
+/* 枠ごと */
+#title-area {
+	margin-top: 20%;
+	text-align: center;
+}
+
+#form {
+	
+}
+
+#url-area {
+	
+}
+
+/* 押した感のあるボタン */
+.square_btn {
+	display: inline-block;
+	position: relative;
+	padding: 0.1em 1em;
+	text-decoration: none;
+	background: #ffabbc; /*ボタン色*/
+	color: #f5385e;
+	border-bottom: solid 5px #ef1a49; /*ボタン色より暗めに*/
+	border-right: solid 5px #f5385e; /*ボタン色より暗めに*/
+}
+
+.square_btn:before {
+	content: " ";
+	position: absolute;
+	bottom: -5px;
+	left: -1px;
+	width: 0;
+	height: 0;
+	border-width: 0 6px 6px 0px;
+	border-style: solid;
+	border-color: transparent;
+	border-bottom-color: #89e5c1; /*背景似合わせる */
+}
+
+.square_btn:after {
+	content: " ";
+	position: absolute;
+	top: -1px;
+	right: -5px;
+	width: 0;
+	height: 0;
+	border-width: 0px 6px 6px 0px;
+	border-style: solid;
+	border-color: #89e5c1;
+	border-bottom-color: transparent;
+}
+
+.square_btn:active { /*ボタンを押したとき*/
+	border: none;
+	-ms-transform: translate(6px, 6px);
+	-webkit-transform: translate(6px, 6px);
+	transform: translate(6px, 6px);
+}
+
+.square_btn:active:after, .square_btn:active:before {
+	content: none; /*ボタンを押すと線が消える*/
+}
+
+.ok-btn {
+	font-weight: bold;
+	font-size: 2rem;
+}
+
+.clear-box {
+	background-color: transparent;
+}
+
+.round-input {
+	border: none;
+	border-radius: 100px;
+	box-shadow: none;
+	padding: 2rem 8px;
+	text-align: center;
 }
