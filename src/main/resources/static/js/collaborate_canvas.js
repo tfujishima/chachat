@@ -1,6 +1,7 @@
 var StageManager = (function(){
   StageManager = function(stage){
     this.stage = stage;
+    setInterval(this.pushStageData,1000*60*5);
   }
   StageManager.prototype.getStage = function(){
     return this.stage;
