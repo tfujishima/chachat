@@ -1,50 +1,70 @@
-.end_otsu{
-	width:300px;
-	position:relative;
-		left:20%
+.end_otsu {
+	width: 300px;
+	position: relative;
+	left: 20%
 }
 
 .kakugen_title {
 	text-align: center;
 	font-size: 20pt;
-	}
-	
+}
+
 .kakugen_text {
 	font-size: 30pt;
 	font-weight: bold;
 	text-align: center;
 	position: relative;
-	  top: 0px;
-	  right: 0px;
-	  bottom: 0px;
-	  left: 0px;
-	  margin: auto;
-	
-	  width: 1200px;
-	
-	}
-	
-.end_top{
-	position: relative;
-    bottom: 0px;
-    left: 70%;
-    width: 90px;
-    height: 60px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	margin: auto;
+	width: 1200px;
 }
+
+.end_top {
+	position: relative;
+	bottom: 0px;
+	left: 70%;
+	width: 90px;
+	height: 60px;
+}
+
 body {
 	background-color: #89e5c1;
-	font-family: "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro W4", "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro", "Hiragino Maru Gothic Pro",
-		"繝偵Λ繧ｮ繝手ｧ偵ざ Pro W3", "Hiragino Kaku Gothic Pro", "HG荳ｸ�ｽｺ�ｾ橸ｽｼ�ｽｯ�ｽｸM-PRO",
+	font-family: "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro W4", "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro",
+		"Hiragino Maru Gothic Pro", "繝偵Λ繧ｮ繝手ｧ偵ざ Pro W3",
+		"Hiragino Kaku Gothic Pro", "HG荳ｸ�ｽｺ�ｾ橸ｽｼ�ｽｯ�ｽｸM-PRO",
 		"HGMaruGothicMPRO";
-		color:#f5385e;
+	color: #f5385e;
 }
-a:link { color:#f5385e; text-decoration:none }
-a:visited { color:#f5385e; text-decoration:none }
-a:hover { color:#f5385e; text-decoration:none }
-a:active { color:#f5385e; text-decoration:none }
 
-input {
+a:link {
+	color: #f5385e;
+	text-decoration: none
+}
+
+a:visited {
+	color: #f5385e;
+	text-decoration: none
+}
+
+a:hover {
+	color: #f5385e;
+	text-decoration: none
+}
+
+a:active {
+	color: #f5385e;
+	text-decoration: none
+}
+
+input, textarea{
 	background-color: #eeeeee;
+}
+
+input[type="radio"] {
+	display: none; 	/* ラジオボタンを非表示にする */
 }
 
 .text {
@@ -64,7 +84,6 @@ input {
 #url-area {
 	
 }
-
 
 /* 謚ｼ縺励◆諢溘�ｮ縺ゅｋ繝懊ち繝ｳ */
 .square_btn {
@@ -115,8 +134,6 @@ input {
 	content: none; /*繝懊ち繝ｳ繧呈款縺吶→邱壹′豸医∴繧�*/
 }
 
-
-
 .square_btn_modal_yes {
 	display: inline-block;
 	position: relative;
@@ -161,7 +178,8 @@ input {
 	transform: translate(6px, 6px);
 }
 
-.square_btn_modal_yes:active:after, .square_btn_modal_yes:active:before {
+.square_btn_modal_yes:active:after, .square_btn_modal_yes:active:before
+	{
 	content: none; /*繝懊ち繝ｳ繧呈款縺吶→邱壹′豸医∴繧�*/
 }
 
@@ -229,9 +247,22 @@ input {
 	padding: 2rem 8px;
 	text-align: center;
 }
-	
 
 .share-btn {
 	width: 5%;
 	margin: 0.5rem 0.5rem 0.5rem 0;
 }
+
+
+/* canvas css 
+.konvajs-content {
+	width: 100% !important;
+	height: auto !important;
+	padding-bottom: 56%;
+}
+
+canvas {
+	width: 114.285714% !important;
+	height: 114.285714% !important;
+}
+*/

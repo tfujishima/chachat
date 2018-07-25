@@ -40,7 +40,7 @@ $('#chat-form').on('submit',function (e){
 });
 $(document).on('receiveChatMessage', function(event, data){
 	var historyArea = $('#message-history');
-	historyArea.append(data.user +':  ' +data.message +'\n');
+	historyArea.append(data.user.split("-")[2]  +':  ' +data.message +'\n');
 	historyArea.scrollTop(10000);
 });
 $.ajax({
@@ -49,6 +49,6 @@ $.ajax({
     dataType: 'json',
 }).done( function(chatHistories, status, xhr){
 	$.each(chatHistories,function(i,entry){
-		$('#message-history').append(entry.user +':  ' +entry.message +'\n');
+		$('#message-history').append(entry.user.split("-")[2] +':  ' +entry.message +'\n');
 	});
 });
