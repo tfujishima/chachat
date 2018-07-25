@@ -29,7 +29,7 @@
 		<form class="mt-5" th:object="${loginForm}" th:action="|/rooms/${roomId}/|"
 			method="post">
 			<div class="mx-auto ok-btn">
-				なまえ<input class="ml-4 w-50 round-input" th:field="*{userName}" type="text" />
+				なまえ<input class="ml-4 w-50 round-input" th:field="*{userName}" type="text" required/>
 			</div>
 			<button type="submit" class="square_btn mt-3 ok-btn">お部屋にはいる</button>
 		</form>
