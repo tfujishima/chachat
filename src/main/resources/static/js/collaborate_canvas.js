@@ -18,6 +18,7 @@ var StageManager = (function(){
       var canvasObjectCreatedHistories = data.canvasObjectCreatedHistories;
       var canvasObjectMovedHistories = data.canvasObjectMovedHistories;
       var canvasObjectDeletedHistories = data.canvasObjectDeletedHistories;
+      console.log(data);
       //stage regenerate
       if(canvasData == null){
     	  this.pushStageData();
@@ -32,7 +33,8 @@ var StageManager = (function(){
       this.stage.scale(stageScale);
       imageData = JSON.parse(canvasData.images);
       //apply image for all konvaImage
-      //this.stage.find('Image').each(function(konvaImage){
+      var drawableNodes = this.stage.find('.drawableNode');
+      var drawingTask = drawableNodes.length;
       this.stage.find('.drawableNode').each(function(konvaImage){
     	var layer = konvaImage.findAncestor('Layer');
         var imageObj = new Image();
@@ -55,15 +57,74 @@ var StageManager = (function(){
         	  break;
           default:
           }
-          $.each(canvasDrawHistories,function(i, data){
-        	if(layer.getId() == data.targetId){
-    			drawLine(konvaImage, {x: data.fromX, y: data.fromY}, {x: data.toX, y: data.toY},
-    					data.mode, data.color, data.lineWidth);
-        	}  
-          });
+          if(--drawingTask === 0){
+        	  $(window).trigger('syncCanvasData');
+          };
+          
         }
         imageObj.src = imageData[layer.getId()];
       });
+      $(window).on('syncCanvasData', $.proxy(function() {
+    	  $.each(canvasDrawHistories,$.proxy(function(i, data){
+    		  if(data.toX != null){
+    			  drawLine(this.stage.findOne('#'+data.targetId).findOne('.drawableNode'), {x: data.fromX, y: data.fromY}, {x: data.toX, y: data.toY},
+    					  data.mode, data.color, data.lineWidth);
+    		  }else if(data.objectType != null && data.objectType === "tag"){
+    			  var tag = createTag(this.stage)
+    			  tag.position({x: data.x,y: data.y});
+    			  tag.findAncestor('Layer').id(data.targetId);
+    			  var konvaImage = tag.findOne('.drawableNode');
+    			  $.each(canvasDrawHistories,$.proxy(function(i, drawData){
+    				  if(drawData.toX != null && data.targetId == drawData.targetId){
+    					  drawLine(konvaImage, {x: drawData.fromX, y: drawData.fromY}, {x: drawData.toX, y: drawData.toY},
+    							  drawData.mode, drawData.color, drawData.lineWidth);
+    				  }
+    			  },this));
+    		  }else if(data.objectType == null && data.x != null){
+    			  var groupLayer = this.stage.findOne('#'+data.targetId);
+    			  groupLayer.findOne('Group').x(data.x).y(data.y);
+    		  }else if(data.x == null && data.toX == null){
+    			  console.log(data);
+    			  this.stage.findOne('#'+data.targetId).destroy();
+    		  }
+    	  },this));
+      },this));
+/*        canvasObjectCreatedHistories.forEach($.proxy(function(data){
+        	if(data.objectType != null && data.objectType === "tag"){
+          	  console.log(this.stage);
+          	  console.log({x: data.x,y: data.y});
+    			var tag = createTag(this.stage)
+    			tag.position({x: data.x,y: data.y});
+    			tag.findAncestor('Layer').id(data.targetId);
+    			var konvaImage = tag.findOne('.drawableNode');
+    			$.each(canvasDrawHistories,$.proxy(function(i, drawData){
+    	        	if(drawData.toX != null && data.targetId == drawData.targetId){
+    	    			drawLine(konvaImage, {x: drawData.fromX, y: drawData.fromY}, {x: drawData.toX, y: drawData.toY},
+    	    					drawData.mode, drawData.color, drawData.lineWidth);
+    	        	}
+    	        },this));
+        	}
+          },this));
+          canvasObjectMovedHistories.forEach($.proxy(function(data){
+        	if(data.objectType == null && data.x != null){
+        	  var groupLayer = this.stage.findOne('#'+data.targetId);
+    		  groupLayer.findOne('Group').x(data.x).y(data.y);
+        	}
+          },this));
+          canvasObjectDeletedHistories.forEach($.proxy(function(data){
+        	if(data.x == null && data.toX == null){
+        		console.log(data);
+        		this.stage.findOne('#'+data.targetId).destroy();
+        	}
+          },this));
+      $.each(canvasDrawHistories,function(i, data){
+      	if(data.toX != null && layer.getId() == data.targetId){
+  			drawLine(konvaImage, {x: data.fromX, y: data.fromY}, {x: data.toX, y: data.toY},
+  					data.mode, data.color, data.lineWidth);
+      	}  
+        });
+*/
+      
       this.stage.draw()
     });
   }
@@ -164,6 +225,8 @@ var CanvasStompClient = (function(){
 			if(data.user === this.user){
 				return;
 			}
+			stageManager.getStage().findOne('#'+data.targetId).destroy();
+			stageManager.getStage().batchDraw();
         },this));
 	}
 	CanvasStompClient.prototype.sendDrawData = function(targetId,fromPosition, toPosition, mode,color,lineWidth){
@@ -271,7 +334,6 @@ var drawLineToCurrentPointerPosition = function (konvaImage, lastPointerPosition
 var registLowestLayerImageEvent = function (lowestLayerImage){
   lowestLayerImage.on('mousemove', function() {
     if(isPaint){
-    	console.log('draw');
       drawLineToCurrentPointerPosition(lowestLayerImage, lastPointerPosition);
       lastPointerPosition = canvasUtil.getCurrentCanvasPointerPosition(stageManager.getStage());
     }

@@ -1,6 +1,7 @@
 package jp.gmo.ojt.chachat.domain.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -8,8 +9,9 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name="canvas_object_created_histories")
 @SuppressWarnings("serial")
-public class CanvasObjectCreatedHistory extends CanvasHistory{
+public class CanvasObjectCreatedHistory extends CanvasHistory<CanvasObjectCreatedHistory>{
 	@NotBlank
 	private String objectType;
 	@NotNull
