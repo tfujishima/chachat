@@ -29,7 +29,7 @@ var ChatStompClient = (function(user){
 	}
 	return ChatStompClient;
 })();
-var user = 'user-' + new Date().getTime().toString(16)  + Math.floor(1000*Math.random()).toString(16);
+var user = 'user-' + new Date().getTime().toString(16)  + Math.floor(1000*Math.random()).toString(16) + "-" + document.getElementById('userNameHidden').value;
 var chatStompClient = new ChatStompClient(user);
 
 $('#chat-form').on('submit',function (e){
