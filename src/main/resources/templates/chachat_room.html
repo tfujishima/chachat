@@ -9,6 +9,8 @@
   <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
 </head>
 <body>
+<input id="userNameHidden" type="hidden" th:value="|${session['userName']}|" readonly
+></input>
   ツール的何か：
   <select id="tool">
     <option value="brush">ペンモード</option>
