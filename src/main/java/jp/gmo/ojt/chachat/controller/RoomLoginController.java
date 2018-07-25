@@ -49,6 +49,6 @@ public class RoomLoginController {
 		ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentRequest();
 
 		session.setAttribute("userName",form.getUserName());
-		return "redirect:" + builder.toUriString() + "rooms/{roomId}/chachat";
+		return "redirect:" + builder.toUriString() + "chachat";
 	}
 }
