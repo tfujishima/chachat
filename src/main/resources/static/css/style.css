@@ -114,6 +114,102 @@ input {
 	content: none; /*繝懊ち繝ｳ繧呈款縺吶→邱壹′豸医∴繧�*/
 }
 
+.square_btn_modal_yes {
+	display: inline-block;
+	position: relative;
+	padding: 0.1em 1em;
+	text-decoration: none;
+	background: #ffabbc; /*繝懊ち繝ｳ濶ｲ*/
+	color: #f5385e;
+	border-bottom: solid 9px #ef1a49; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
+	border-right: solid 9px #f5385e; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
+}
+
+.square_btn_modal_yes:before {
+	content: " ";
+	position: absolute;
+	bottom: -9px;
+	left: -1px;
+	width: 0;
+	height: 0;
+	border-width: 0 10px 10px 0px;
+	border-style: solid;
+	border-color: transparent;
+	border-bottom-color: #FFF; /*閭梧勹莨ｼ蜷医ｏ縺帙ｋ */
+}
+
+.square_btn_modal_yes:after {
+	content: " ";
+	position: absolute;
+	top: -1px;
+	right: -9px;
+	width: 0;
+	height: 0;
+	border-width: 0px 10px 10px 0px;
+	border-style: solid;
+	border-color: #FFF;
+	border-bottom-color: transparent;
+}
+
+.square_btn_modal_yes:active { /*繝懊ち繝ｳ繧呈款縺励◆縺ｨ縺�*/
+	border: none;
+	-ms-transform: translate(6px, 6px);
+	-webkit-transform: translate(6px, 6px);
+	transform: translate(6px, 6px);
+}
+
+.square_btn_modal_yes:active:after, .square_btn_modal_yes:active:before {
+	content: none; /*繝懊ち繝ｳ繧呈款縺吶→邱壹′豸医∴繧�*/
+}
+
+.square_btn_modal_no {
+	display: inline-block;
+	position: relative;
+	padding: 0.1em 1em;
+	text-decoration: none;
+	background: #a4b3fc; /*繝懊ち繝ｳ濶ｲ*/
+	color: #2743ef;
+	border-bottom: solid 9px #1b00e7; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
+	border-right: solid 9px #0400d2; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
+}
+
+.square_btn_modal_no:before {
+	content: " ";
+	position: absolute;
+	bottom: -9px;
+	left: -1px;
+	width: 0;
+	height: 0;
+	border-width: 0 10px 10px 0px;
+	border-style: solid;
+	border-color: transparent;
+	border-bottom-color: #FFF; /*閭梧勹莨ｼ蜷医ｏ縺帙ｋ */
+}
+
+.square_btn_modal_no:after {
+	content: " ";
+	position: absolute;
+	top: -1px;
+	right: -9px;
+	width: 0;
+	height: 0;
+	border-width: 0px 10px 10px 0px;
+	border-style: solid;
+	border-color: #FFF;
+	border-bottom-color: transparent;
+}
+
+.square_btn_modal_no:active { /*繝懊ち繝ｳ繧呈款縺励◆縺ｨ縺�*/
+	border: none;
+	-ms-transform: translate(6px, 6px);
+	-webkit-transform: translate(6px, 6px);
+	transform: translate(6px, 6px);
+}
+
+.square_btn_modal_no:active:after, .square_btn_modal_no:active:before {
+	content: none; /*繝懊ち繝ｳ繧呈款縺吶→邱壹′豸医∴繧�*/
+}
+
 .ok-btn {
 	font-weight: bold;
 	font-size: 2rem;
