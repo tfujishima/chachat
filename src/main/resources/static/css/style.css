@@ -80,6 +80,8 @@ input {
 .ok-btn {
 	font-weight: bold;
 	font-size: 2rem;
+	font-family: 'Chango', cursive;
+	
 }
 
 .clear-box {
@@ -92,4 +94,9 @@ input {
 	box-shadow: none;
 	padding: 2rem 8px;
 	text-align: center;
+}
+
+.share-btn {
+	width: 5%;
+	margin: 0.5rem 0.5rem 0.5rem 0;
 }
