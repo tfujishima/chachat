@@ -27,7 +27,18 @@
       <div id="container"></div>
     </div>
   </div>
-  <p>chachat room page</p>
+  <div class="row">
+   <textarea id="message-history" cols=100 rows=5 readonly style="overflow: hidden;resize: none;"></textarea> 
+    </div>
+  <div class="row">
+  <form class="form-inline" id="chat-form">
+    <div class="form-group">
+    <label for="message" class="sr-only">chat</label>
+    <input type="text" class="form-control" id="message" placeholder="input here">
+  </div>
+  <button type="submit" id="send-message-button" class="btn btn-default">送信</button>
+  </form>
+  </div>
   <!-- chat is here -->
   <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
   <script th:src="@{/webjars/konva/2.1.7/konva.min.js}"></script>
