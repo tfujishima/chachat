@@ -178,7 +178,7 @@ var CanvasStompClient = (function(){
 		this.baseUrl = env[1];
 		this.roomId = env[2];
 		this.canvasId = 1;
-		this.user = 'user-' + new Date().getTime().toString(16)  + Math.floor(1000*Math.random()).toString(16);
+		this.user = "user-"+ new Date().getTime().toString(16)+ Math.floor(1000*Math.random()).toString(16)+ "-"+ document.getElementById('userNameHidden').value;
 		this.subscription = null;
 		var socket = new SockJS(this.baseUrl +'stomp');
 	    this.client = Stomp.over(socket);
@@ -507,6 +507,7 @@ var createTag = function(stage) {
 $('#tool').on('change', function() {
   mode = this.value;
 });
+
 
 stageManager.syncStageDataFromServer();
 var canvasStompClient = new CanvasStompClient();
