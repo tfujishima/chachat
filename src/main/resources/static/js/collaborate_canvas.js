@@ -19,7 +19,7 @@ var StageManager = (function(){
       var canvasObjectCreatedHistories = data.canvasObjectCreatedHistories;
       var canvasObjectMovedHistories = data.canvasObjectMovedHistories;
       var canvasObjectDeletedHistories = data.canvasObjectDeletedHistories;
-      console.log(data);
+      var canvasTextChangeHistories = data.canvasTextChangeHistories;
       //stage regenerate
       if(canvasData == null){
     	  this.pushStageData();
@@ -84,8 +84,9 @@ var StageManager = (function(){
     		  }else if(data.objectType == null && data.x != null){
     			  var groupLayer = this.stage.findOne('#'+data.targetId);
     			  groupLayer.findOne('Group').x(data.x).y(data.y);
+    		  }else if(data.text != null){
+    			  this.stage.findOne('#'+data.targetId).findOne('textNode').text(data.text);
     		  }else if(data.x == null && data.toX == null){
-    			  console.log(data);
     			  this.stage.findOne('#'+data.targetId).destroy();
     		  }
     	  },this));
@@ -229,6 +230,14 @@ var CanvasStompClient = (function(){
 			stageManager.getStage().findOne('#'+data.targetId).destroy();
 			stageManager.getStage().batchDraw();
         },this));
+		this.subscription = this.client.subscribe('/history/object/text/change/rooms/' +this.roomId+ '/canvas/' +this.canvasId, $.proxy(function (response) {
+			var data = JSON.parse(response.body);
+			if(data.user === this.user){
+				return;
+			}
+			stageManager.getStage().findOne('#'+data.targetId).findOne('.textNode').text(data.text);
+			stageManager.getStage().batchDraw();
+        },this));
 	}
 	CanvasStompClient.prototype.sendDrawData = function(targetId,fromPosition, toPosition, mode,color,lineWidth){
 		console.log('/ws/rooms/' +this.roomId+ '/canvas/' +this.canvasId+ '/draw');
@@ -257,6 +266,12 @@ var CanvasStompClient = (function(){
 			targetId: movedObject.findAncestor('Layer').getId(),
 			x: movedObject.x(),
 			y: movedObject.y()}));
+	}
+	CanvasStompClient.prototype.sendTextChangeHistory = function(textObject){
+		this.client.send('/ws/rooms/' +this.roomId+ '/canvas/' +this.canvasId+ '/object/text/change', {}, JSON.stringify({
+			user: this.user,
+			targetId: textObject.findAncestor('Layer').getId(),
+			text: textObject.text()}));
 	}
 	return CanvasStompClient;
 })();
@@ -393,6 +408,7 @@ var registTagEvent = function(tagGroup) {
 	               tagGroup.findAncestor('Layer').batchDraw();
 	               document.body.removeChild(textarea);
 	               isTagModifing = false;
+	               canvasStompClient.sendTextChangeHistory(textNode);
 	           }
 	       });
 	   });
