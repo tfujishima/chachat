@@ -86,8 +86,16 @@ var ActiveUserManager = (function(){
 			}).done( function(activeUsers, status, xhr){
 				this.activeUsers = activeUsers;
 				console.log(this.activeUsers);
+				for(var i = 1; i <= 3 ; i++) {
+					var ch = document.getElementById('ch'+i);
+					if(i < activeUsers.length) {
+						ch.style.visibility = "visible";
+					}else {
+						ch.style.visibility = "hidden";						
+					}
+				}
 			});
-	    },this),1000*15);
+	    },this),1000*5);
 	}
 	ActiveUserManager.prototype.getUsers = function(){
 		return this.activeUsers;

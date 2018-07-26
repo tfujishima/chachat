@@ -69,7 +69,7 @@
 		<!-- chat is here -->
 		<div class="row text-center">
 			<div class="col-1 p-0">
-				<img th:src="@{/img/chara2.png}" id="me" class="w-100 run-animation">
+				<img th:src="@{/img/char0.png}" id="me" class="w-75 run-animation">
 			</div>
 			<div class="col-8">
 				<textarea id="message-history" class="w-100" cols=100 rows=5
@@ -77,14 +77,14 @@
 			</div>
 			<div class="col-3">
 				<div class="row">
-					<div class="col">
+					<div id="ch1" class="col" style="visibility: hidden">
 						<img th:src="@{/img/chara1.png}" class="w-100">
 					</div>
-					<div class="col">
-						<img th:src="@{/img/chara1.png}" class="w-100">
+					<div id="ch2" class="col" style="visibility: hidden">
+						<img th:src="@{/img/chara2.png}" class="w-100">
 					</div>
-					<div class="col">
-						<img th:src="@{/img/chara1.png}" class="w-100">
+					<div id="ch3" class="col" style="visibility: hidden">
+						<img th:src="@{/img/char3.png}" class="w-100">
 					</div>
 				</div>
 				<div class="row"></div>
@@ -147,6 +147,8 @@
 				$('#me')[0].offsetWidth = $('#me')[0].offsetWidth;
 				$('#me').addClass('run-animation');
 			});
+			
+			
 		</script>
 	</div>
 </body>
