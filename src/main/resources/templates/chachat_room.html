@@ -52,25 +52,6 @@
 					<button type="button" class="square_btn_modal_yes"
 						data-toggle="modal" data-target="#askEnd">おわり</button>
 				</div>
-
-				<!-- Modal -->
-				<div class="modal fade" id="askEnd" tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class=""></div>
-							<div class="m-5">
-								<img alt="終了確認" th:src="@{/img/askEnd.png}" class="w-100">
-							</div>
-							<div class="mt-4 mb-2 text-center">
-								<button type="button" class="square_btn_modal_no mx-2"
-									data-dismiss="modal">まだやる！</button>
-								<a th:href="@{/end/}" class="square_btn_modal_yes mx-2">いいよ！</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
 			</div>
 		</div>
 
@@ -122,6 +103,27 @@
 			</div>
 		</form>
 
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="askEnd" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class=""></div>
+					<div class="m-5">
+						<img alt="終了確認" th:src="@{/img/askEnd.png}" class="w-100">
+					</div>
+					<div class="mt-4 mb-2 text-center">
+						<button type="button" class="square_btn_modal_no mx-2"
+							data-dismiss="modal">まだやる！</button>
+						<a th:href="@{/end/}" class="square_btn_modal_yes mx-2">いいよ！</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	
 
 		<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
 		<script th:src="@{/webjars/konva/2.1.7/konva.min.js}"></script>
