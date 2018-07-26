@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jp.gmo.ojt.chachat.domain.model.Room;
 import jp.gmo.ojt.chachat.domain.service.RoomService;
@@ -45,7 +46,9 @@ public class RoomLoginController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String loginAuth(@PathVariable("roomId") String roomId, LoginForm form) {
+		ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentRequest();
+
 		session.setAttribute("userName",form.getUserName());
-		return "redirect:/rooms/{roomId}/chachat";
+		return "redirect:" + builder.toUriString() + "chachat";
 	}
 }

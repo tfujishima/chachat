@@ -11,6 +11,7 @@ import jp.gmo.ojt.chachat.domain.model.CanvasIdentity;
 import jp.gmo.ojt.chachat.domain.model.CanvasObjectCreatedHistory;
 import jp.gmo.ojt.chachat.domain.model.CanvasObjectDeletedHistory;
 import jp.gmo.ojt.chachat.domain.model.CanvasObjectMovedHistory;
+import jp.gmo.ojt.chachat.domain.model.CanvasTextChangeHistory;
 import jp.gmo.ojt.chachat.domain.service.CanvasDataService;
 import jp.gmo.ojt.chachat.domain.service.CanvasHistoryService;
 
@@ -36,6 +37,8 @@ public class CanvasDataController {
 	CanvasHistoryService<CanvasObjectMovedHistory> canvasObjectMovedHistoryService;
 	@Autowired
 	CanvasHistoryService<CanvasObjectDeletedHistory> canvasObjectDeletedHistoryService;
+	@Autowired
+	CanvasHistoryService<CanvasTextChangeHistory> canvasTextChangeHistoryService;
 
 	
 	@RequestMapping(method=RequestMethod.GET)
@@ -45,18 +48,22 @@ public class CanvasDataController {
 		List<CanvasObjectCreatedHistory> canvasObjectCreatedHistories;
 		List<CanvasObjectMovedHistory> canvasObjectMovedHistories;
 		List<CanvasObjectDeletedHistory> canvasObjectDeletedHistories;
+		List<CanvasTextChangeHistory> canvasTextChangeHistories;
 		if(canvasData == null) {
 			canvasDrawHistories = canvasDrawHistoryService.getHistories(new CanvasIdentity(roomId,canvasId));
 			canvasObjectCreatedHistories = canvasObjectCreatedHistoryService.getHistories(new CanvasIdentity(roomId,canvasId));
 			canvasObjectMovedHistories = canvasObjectMovedHistoryService.getHistories(new CanvasIdentity(roomId,canvasId));
 			canvasObjectDeletedHistories = canvasObjectDeletedHistoryService.getHistories(new CanvasIdentity(roomId,canvasId));
+			canvasTextChangeHistories = canvasTextChangeHistoryService.getHistories(new CanvasIdentity(roomId,canvasId));
 		}else {
 			canvasDrawHistories = canvasDrawHistoryService.getAfterHistoriesByDate(new CanvasIdentity(roomId,canvasId), canvasData.getUpdatedAt());
 			canvasObjectCreatedHistories = canvasObjectCreatedHistoryService.getAfterHistoriesByDate(new CanvasIdentity(roomId,canvasId), canvasData.getUpdatedAt());
 			canvasObjectMovedHistories = canvasObjectMovedHistoryService.getAfterHistoriesByDate(new CanvasIdentity(roomId,canvasId), canvasData.getUpdatedAt());
 			canvasObjectDeletedHistories = canvasObjectDeletedHistoryService.getAfterHistoriesByDate(new CanvasIdentity(roomId,canvasId), canvasData.getUpdatedAt());
+			canvasTextChangeHistories = canvasTextChangeHistoryService.getAfterHistoriesByDate(new CanvasIdentity(roomId,canvasId), canvasData.getUpdatedAt());
 		}
-		return new CanvasDataResult(canvasData,canvasDrawHistories,canvasObjectCreatedHistories,canvasObjectMovedHistories,canvasObjectDeletedHistories);
+		return new CanvasDataResult(canvasData,canvasDrawHistories,canvasObjectCreatedHistories,
+				canvasObjectMovedHistories,canvasObjectDeletedHistories,canvasTextChangeHistories);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
