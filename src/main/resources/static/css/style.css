@@ -34,11 +34,11 @@
     width: 90px;
     height: 60px;
 }
-/* 蜈ｱ騾� */
+/* 共通 */
 body {
 	background-color: #89e5c1;
-	font-family: "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro W4", "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro", "Hiragino Maru Gothic Pro",
-		"繝偵Λ繧ｮ繝手ｧ偵ざ Pro W3", "Hiragino Kaku Gothic Pro", "HG荳ｸ�ｽｺ�ｾ橸ｽｼ�ｽｯ�ｽｸM-PRO",
+	font-family: "ヒラギノ丸ゴ Pro W4", "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro",
+		"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "HG丸ｺﾞｼｯｸM-PRO",
 		"HGMaruGothicMPRO";
 	
 }
@@ -51,7 +51,7 @@ input {
 	
 }
 
-/* 譫�縺斐→ */
+/*枠ごと */
 #title-area {
 	margin-top: 20%;
 	text-align: center;
@@ -65,16 +65,16 @@ input {
 	
 }
 
-/* 謚ｼ縺励◆諢溘�ｮ縺ゅｋ繝懊ち繝ｳ */
+/* 押した感のあるボタン */
 .square_btn {
 	display: inline-block;
 	position: relative;
 	padding: 0.1em 1em;
 	text-decoration: none;
-	background: #ffabbc; /*繝懊ち繝ｳ濶ｲ*/
+	background: #ffabbc; /*ボタン色*/
 	color: #f5385e;
-	border-bottom: solid 5px #ef1a49; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
-	border-right: solid 5px #f5385e; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
+	border-bottom: solid 5px #ef1a49; /*ボタン色より暗めに*/
+	border-right: solid 5px #f5385e; /*ボタン色より暗めに*/
 }
 
 .square_btn:before {
@@ -87,7 +87,7 @@ input {
 	border-width: 0 6px 6px 0px;
 	border-style: solid;
 	border-color: transparent;
-	border-bottom-color: #89e5c1; /*閭梧勹莨ｼ蜷医ｏ縺帙ｋ */
+	border-bottom-color: #89e5c1; /*背景似合わせる */
 }
 
 .square_btn:after {
@@ -103,7 +103,7 @@ input {
 	border-bottom-color: transparent;
 }
 
-.square_btn:active { /*繝懊ち繝ｳ繧呈款縺励◆縺ｨ縺�*/
+.square_btn:active { /*ボタンを押したとき*/
 	border: none;
 	-ms-transform: translate(6px, 6px);
 	-webkit-transform: translate(6px, 6px);
@@ -111,7 +111,7 @@ input {
 }
 
 .square_btn:active:after, .square_btn:active:before {
-	content: none; /*繝懊ち繝ｳ繧呈款縺吶→邱壹′豸医∴繧�*/
+	content: none; /*ボタンを押すと線が消える*/
 }
 
 .ok-btn {
