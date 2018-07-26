@@ -6,6 +6,7 @@
   <title>Chachat</title>
   <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
   <link href="/js/kakugen.js" th:href="@{/js/kakugen.js}"></link>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"></link>
   
 </head>
 
@@ -19,9 +20,11 @@
   <p class="kakugen_title">本日の格言</p>
   
   <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
-  <p class="kakugen_text">
+  <div class="kakugen_text"> 
+  	<div class="animated lightSpeedIn">
   <script src="/js/kakugen.js" th:src="@{/js/kakugen.js}"></script>
-  </p>
+  	</div>
+  </div>
   
   <img alt="top.png" th:src="@{/image/top.png}" class="end_top">
   
