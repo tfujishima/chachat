@@ -115,6 +115,10 @@ var BotUser = (function(user, chatClient){
 			this.chatClient.sendChatMessage(message.slice(command.length), this.name);
 			break;
 		case "\\roulette":
+			var activeUser = activeUserManager.getUsers();
+			var target = activeUser[Math.floor(Math.random() * activeUser.length)];
+			var targetName = target.name.split("-")[2];
+			this.chatClient.sendChatMessage(targetName+' さんが選ばれました', this.name);
 			break;
 		case "\\topic":
 			break;
