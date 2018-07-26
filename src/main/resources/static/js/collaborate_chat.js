@@ -21,9 +21,10 @@ var ChatStompClient = (function(user){
 			$(document).trigger('receiveChatMessage',[data]);
         },this));
 	}
-	ChatStompClient.prototype.sendChatMessage = function(message){
+	ChatStompClient.prototype.sendChatMessage = function(message, speaker = null){
+		var chatSpeaker = speaker === null ? this.user : speaker;
 		this.client.send('/ws/rooms/' +this.roomId+ '/chat', {}, JSON.stringify({
-			user: this.user,
+			user: chatSpeaker,
 			message: message
 		}));
 	}
@@ -37,7 +38,11 @@ $('#chat-form').on('submit',function (e){
 	e.preventDefault();
 	var message = $('#message').val();
 	$('#message').val("");
-	chatStompClient.sendChatMessage(message);
+	if(botUser.hasSubCommand(message)){
+	  botUser.doSubCommand(message);
+	}else{
+	  chatStompClient.sendChatMessage(message);
+	}
 });
 $(document).on('receiveChatMessage', function(event, data){
 	var historyArea = $('#message-history');
@@ -97,30 +102,32 @@ var ActiveUserManager = (function(){
 
 var activeUserManager = new ActiveUserManager();
 
-var BotUser = (function(){
-	var BotUser = function(){
-		this.name = 'Bot';
-		this.subCommands = ['\say','\roulette','\topic','\help']
+var BotUser = (function(user, chatClient){
+	var BotUser = function(user, chatClient){
+		this.name = user.split("-")[0] + '-' + user.split("-")[1] + '-Bot';
+		this.chatClient = chatClient;
+		this.subCommands = ['\\say','\\roulette','\\topic','\\help'];
 	}
-	BotUser.prototype.doCommand = function(message){
+	BotUser.prototype.doSubCommand = function(message){
 		var command = message.split(' ')[0];
 		switch(command){
-		case "\say":
+		case "\\say":
+			this.chatClient.sendChatMessage(message.slice(command.length), this.name);
 			break;
-		case "\roulette":
+		case "\\roulette":
 			break;
-		case "\topic":
+		case "\\topic":
 			break;
-		case "\help":
+		case "\\help":
 			break;
 		default:
 		}
 	}
-	BotUser.hasSubCommand = function(message){
+	BotUser.prototype.hasSubCommand = function(message){
 		var command = message.split(' ')[0];
-		return this.subCommands.indexof(command) > 0; 
+		return this.subCommands.indexOf(command) >= 0; 
 	}
 	return BotUser;
 })();
 
-var botUser = new BotUser();
+var botUser = new BotUser(user, chatStompClient);
