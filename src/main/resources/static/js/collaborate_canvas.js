@@ -85,7 +85,7 @@ var StageManager = (function(){
     			  var groupLayer = this.stage.findOne('#'+data.targetId);
     			  groupLayer.findOne('Group').x(data.x).y(data.y);
     		  }else if(data.text != null){
-    			  this.stage.findOne('#'+data.targetId).findOne('textNode').text(data.text);
+    			  this.stage.findOne('#'+data.targetId).findOne('.textNode').text(data.text);
     		  }else if(data.x == null && data.toX == null){
     			  this.stage.findOne('#'+data.targetId).destroy();
     		  }
