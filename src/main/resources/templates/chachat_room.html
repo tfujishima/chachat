@@ -20,17 +20,17 @@
 
 	<div class="container-fluid">
 		<div class="row my-1 text-center mx-auto" data-toggle="buttons">
-			<div class="offset-4 tool py-1 px-3">
-				<i class="fa fa-toolbox"></i>
-					<select id="tool" class="">
+			<div class="mx-auto tool py-1 px-3">
+				<i class="fa fa-toolbox"></i> <select id="tool" class="">
 					<option value="brush">ペン</option>
 					<option value="eraser">消しゴム</option>
 				</select>
 				<!--  <button type=button id="create-tag">付箋召喚</button> -->
-
+				<!-- 
 				<button type=button onclick="stageManager.pushStageData()">データプッシュ</button>
 				<button type=button
 					onclick="stageManager.syncStageDataFromServer();">データプル</button>
+				 -->
 				<div class="btn-group">
 					<!-- <input type="checkbox" onclick="changeMode();" id="tool"
 					class="toggle-button"><label for="tool" class=""><i  id="tool_icon"
@@ -41,12 +41,16 @@
 					type="radio" id="tool-eraser" autocomplete="off"><i
 					class="fas fa-eraser m-0"></i></label>
 					 -->
-					<button type="button" id="create-tag" class="square_btn_modal_yes btn-group">
+					<button type="button" id="create-tag"
+						class="square_btn_modal_yes btn-group">
 						<i class="fas fa-file-alt"></i>
 					</button>
 					<!-- Button trigger modal -->
-					<button type="button" class="square_btn_modal_yes" data-toggle="modal"
-						data-target="#askEnd">おわり</button>
+					<button type="button" class="square_btn_modal_yes">
+						<i class="fa fa-trash-alt"></i>
+					</button>
+					<button type="button" class="square_btn_modal_yes"
+						data-toggle="modal" data-target="#askEnd">おわり</button>
 				</div>
 
 				<!-- Modal -->
@@ -84,7 +88,7 @@
 		<!-- chat is here -->
 		<div class="row text-center">
 			<div class="col-1 p-0">
-				<img th:src="@{/img/chara1.png}" id="me" class="w-100 run-animation">
+				<img th:src="@{/img/chara2.png}" id="me" class="w-100 run-animation">
 			</div>
 			<div class="col-8">
 				<textarea id="message-history" class="w-100" cols=100 rows=5
@@ -136,11 +140,11 @@
 			integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 			crossorigin="anonymous"></script>
 		<script>
-		$('#send-message-button').on('click', function () {
-		    $('#me').removeClass('run-animation');
-		    $('#me')[0].offsetWidth = $('#me')[0].offsetWidth;
-		    $('#me').addClass('run-animation');
-		});
+			$('#send-message-button').on('click', function() {
+				$('#me').removeClass('run-animation');
+				$('#me')[0].offsetWidth = $('#me')[0].offsetWidth;
+				$('#me').addClass('run-animation');
+			});
 		</script>
 	</div>
 </body>

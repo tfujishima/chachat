@@ -283,22 +283,14 @@ canvas {
 	animation-timing-function: liner;
 	animation-iteration-count: 1;
 	animation-fill-mode: forwards;
-	animation-duration: 30s;
+	animation-duration: 10s;
 }
 
-@
-keyframes icon_opacity { 0% {
+@keyframes icon_opacity { 
+	0% {
 	opacity: 1.0;
-}
-100%
-{
-opacity
-
-
-:
-
- 
-
-0;
-}
+	}
+	100% {
+	opacity: 0;
+	}
 }
