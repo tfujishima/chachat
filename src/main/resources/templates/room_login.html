@@ -25,9 +25,8 @@
 		</div>
 		<h1 class="font-weight-bold mt-3"
 			th:text="|〜${session.room.getRoomName()}〜|">Chachat</h1>
-			
-		<form class="mt-5" th:object="${loginForm}" th:action="|/rooms/${roomId}/|"
-			method="post">
+		<form class="mt-5" th:object="${loginForm}" th:action="@{|/rooms/${roomId}/|}"
+			method="post" autocomplete="off">
 			<div class="mx-auto ok-btn">
 				なまえ<input class="ml-4 w-50 round-input" th:field="*{userName}" type="text" required/>
 			</div>
