@@ -29,6 +29,7 @@ var ChatStompClient = (function(user){
 	}
 	return ChatStompClient;
 })();
+
 var user = 'user-' + new Date().getTime().toString(16)  + Math.floor(1000*Math.random()).toString(16);
 var chatStompClient = new ChatStompClient(user);
 
@@ -52,3 +53,65 @@ $.ajax({
 		$('#message-history').append(entry.user +':  ' +entry.message +'\n');
 	});
 });
+
+
+var ActiveUserManager = (function(){
+	var ActiveUserManager = function(){
+		this.activeUsers = [];
+		setInterval($.proxy(function(){
+			$.ajax({
+			    url: './users/',
+			    type: 'POST',
+			    data: JSON.stringify({name: user}),
+			    contentType: 'application/json',
+			    dataType: 'json',
+			    context: this
+			}).done( function(updatedUser, status, xhr){
+			  	console.log(updatedUser);
+			});
+			$.ajax({
+			    url: './users/',
+			    type: 'GET',
+			    dataType: 'json',
+			    context: this
+			}).done( function(activeUsers, status, xhr){
+				this.activeUsers = activeUsers;
+				console.log(this.activeUsers);
+			});
+	    },this),1000*15);
+	}
+	ActiveUserManager.prototype.getUsers = function(){
+		return this.activeUsers;
+	}
+	return ActiveUserManager;
+})();
+
+var activeUserManager = new ActiveUserManager();
+
+var BotUser = (function(){
+	var BotUser = function(){
+		this.name = 'Bot';
+		this.subCommands = ['\say','\roulette','\topic','\help']
+	}
+	BotUser.prototype.doCommand = function(message){
+		var command = message.split(' ')[0];
+		switch(command){
+		case: "\say":
+			break;
+		case; "\roulette":
+			break;
+		case; "\topic":
+			break;
+		case: "\help":
+			break;
+		default:
+		}
+	}
+	BotUser.hasSubCommand = function(message){
+		var command = message.split(' ')[0];
+		return this.subCommands.indexof(command) > 0; 
+	}
+	return BotUser;
+})();
+
+var botUser = new BotUser();
