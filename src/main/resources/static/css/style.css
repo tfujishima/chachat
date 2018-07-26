@@ -14,20 +14,27 @@
 	font-weight: bold;
 	text-align: center;
 	position: relative;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	left: 0px;
-	margin: auto;
-	width: 1200px;
-}
+	  top: 0px;
+	  right: 0px;
+	  bottom: 0px;
+	  left: 0px;
+	  margin: auto;
+	}
 
-.end_top {
+#animate {
+	animation-duration: 4s; /* アニメーションの時間 */
+    animation-delay: 3s; /* アニメーション開始時間 */	
+	}
+	
+.end_top{
 	position: relative;
-	bottom: 0px;
-	left: 70%;
-	width: 90px;
-	height: 60px;
+	padding-top: 10px;
+    bottom: 0px;
+    left: 70%;
+    width: 90px;
+    height: 60px;
+
+
 }
 
 body {
@@ -36,6 +43,7 @@ body {
 		"Hiragino Maru Gothic Pro", "繝偵Λ繧ｮ繝手ｧ偵ざ Pro W3",
 		"Hiragino Kaku Gothic Pro", "HG荳ｸ�ｽｺ�ｾ橸ｽｼ�ｽｯ�ｽｸM-PRO",
 		"HGMaruGothicMPRO";
+
 	color: #f5385e;
 }
 
@@ -68,6 +76,7 @@ input[type="checkbox"] {
 	
 }
 
+/*枠ごと */
 select {
 	background-color: #ffabbc;
 	color: #f5385e;
@@ -80,7 +89,6 @@ select {
 	border-radius: 10px; /*角の丸み*/
 }
 
-/* 譫�縺斐→ */
 #title-area {
 	margin-top: 20%;
 	text-align: center;
