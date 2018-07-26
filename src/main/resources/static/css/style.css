@@ -295,7 +295,7 @@ canvas {
 	animation-timing-function: liner;
 	animation-iteration-count: 1;
 	animation-fill-mode: forwards;
-	animation-duration: 10s;
+	animation-duration: 30s;
 }
 
 @keyframes icon_opacity { 
