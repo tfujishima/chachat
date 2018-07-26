@@ -278,6 +278,10 @@ canvas {
 	height: 114.285714% !important;
 }
 */
+#container {
+	background-color: #FFF;
+}
+
 .run-animation {
 	animation-name: icon_opacity;
 	animation-timing-function: liner;
