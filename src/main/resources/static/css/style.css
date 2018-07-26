@@ -10,6 +10,7 @@
 	}
 	
 .kakugen_text {
+	color: #000000;
 	font-size: 30pt;
 	font-weight: bold;
 	text-align: center;
@@ -23,7 +24,7 @@
 
 #animate {
 	animation-duration: 4s; /* アニメーションの時間 */
-    animation-delay: 3s; /* アニメーション開始時間 */	
+    animation-delay: 1s; /* アニメーション開始時間 */	
 	}
 	
 .end_top{
