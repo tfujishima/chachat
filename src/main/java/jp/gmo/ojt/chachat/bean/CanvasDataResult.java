@@ -7,6 +7,7 @@ import jp.gmo.ojt.chachat.domain.model.CanvasDrawHistory;
 import jp.gmo.ojt.chachat.domain.model.CanvasObjectCreatedHistory;
 import jp.gmo.ojt.chachat.domain.model.CanvasObjectDeletedHistory;
 import jp.gmo.ojt.chachat.domain.model.CanvasObjectMovedHistory;
+import jp.gmo.ojt.chachat.domain.model.CanvasTextChangeHistory;
 
 public class CanvasDataResult {
     private CanvasData canvasData;
@@ -14,6 +15,7 @@ public class CanvasDataResult {
     private List<CanvasObjectCreatedHistory> canvasObjectCreatedHistories;
     private List<CanvasObjectMovedHistory> canvasObjectMovedHistories;
     private List<CanvasObjectDeletedHistory> canvasObjectDeletedHistories;
+    private List<CanvasTextChangeHistory> canvasTextChangeHistories;
     
     public CanvasDataResult() {
     	
@@ -21,12 +23,13 @@ public class CanvasDataResult {
     
     public CanvasDataResult(CanvasData canvasData, List<CanvasDrawHistory> canvasDrawHistories,
     		List<CanvasObjectCreatedHistory> canvasObjectCreatedHistories,List<CanvasObjectMovedHistory> canvasObjectMovedHistories,
-    		List<CanvasObjectDeletedHistory> canvasObjectDeletedHistories) {
+    		List<CanvasObjectDeletedHistory> canvasObjectDeletedHistories,List<CanvasTextChangeHistory> canvasTextChangeHistories) {
     	this.canvasData = canvasData;
     	this.canvasDrawHistories = canvasDrawHistories;
     	this.canvasObjectCreatedHistories = canvasObjectCreatedHistories;
     	this.canvasObjectMovedHistories = canvasObjectMovedHistories;
     	this.canvasObjectDeletedHistories = canvasObjectDeletedHistories;
+    	this.canvasTextChangeHistories = canvasTextChangeHistories;
     }
     
     public CanvasData getCanvasData() {
@@ -58,5 +61,11 @@ public class CanvasDataResult {
     }
     public void setCanvasObjectDeletedHistories(List<CanvasObjectDeletedHistory> canvasObjectDeletedHistories) {
     	this.canvasObjectDeletedHistories = canvasObjectDeletedHistories;
+    }
+    public List<CanvasTextChangeHistory> getCanvasTextChangeHistories(){
+    	return this.canvasTextChangeHistories;
+    }
+    public void setCanvasTextChangeHistories(List<CanvasTextChangeHistory> canvasTextChangeHistories) {
+    	this.canvasTextChangeHistories = canvasTextChangeHistories;
     }
 }

@@ -1,14 +1,14 @@
-.end_otsu{
-	width:300px;
-	position:relative;
-		left:20%
+.end_otsu {
+	width: 300px;
+	position: relative;
+	left: 20%
 }
 
 .kakugen_title {
 	text-align: center;
 	font-size: 20pt;
-	}
-	
+}
+
 .kakugen_text {
 	font-size: 30pt;
 	font-weight: bold;
@@ -33,25 +33,62 @@
     left: 70%;
     width: 90px;
     height: 60px;
-}
-/* 共通 */
-body {
-	background-color: #89e5c1;
-	font-family: "ヒラギノ丸ゴ Pro W4", "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro",
-		"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "HG丸ｺﾞｼｯｸM-PRO",
-		"HGMaruGothicMPRO";
-	
+
+
 }
 
-input {
+body {
+	background-color: #89e5c1;
+	font-family: "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro W4", "繝偵Λ繧ｮ繝惹ｸｸ繧ｴ Pro",
+		"Hiragino Maru Gothic Pro", "繝偵Λ繧ｮ繝手ｧ偵ざ Pro W3",
+		"Hiragino Kaku Gothic Pro", "HG荳ｸ�ｽｺ�ｾ橸ｽｼ�ｽｯ�ｽｸM-PRO",
+		"HGMaruGothicMPRO";
+
+	color: #f5385e;
+}
+
+a:link {
+	color: #f5385e;
+	text-decoration: none
+}
+
+a:visited {
+	color: #f5385e;
+	text-decoration: none
+}
+
+a:hover {
+	color: #f5385e;
+	text-decoration: none
+}
+
+a:active {
+	color: #f5385e;
+	text-decoration: none
+}
+
+input, textarea {
 	background-color: #eeeeee;
 }
 
-.text {
+input[type="checkbox"] {
+	/*display: none;*/ /* ラジオボタンを非表示にする */
 	
 }
 
 /*枠ごと */
+select {
+	background-color: #ffabbc;
+	color: #f5385e;
+	height: 90%;
+}
+
+.tool {
+	background-color: #FFF;
+	border: solid 3px #f5385e; /*線*/
+	border-radius: 10px; /*角の丸み*/
+}
+
 #title-area {
 	margin-top: 20%;
 	text-align: center;
@@ -65,45 +102,45 @@ input {
 	
 }
 
-/* 押した感のあるボタン */
+/* 謚ｼ縺励◆諢溘�ｮ縺ゅｋ繝懊ち繝ｳ */
 .square_btn {
 	display: inline-block;
 	position: relative;
 	padding: 0.1em 1em;
 	text-decoration: none;
-	background: #ffabbc; /*ボタン色*/
+	background: #ffabbc; /*繝懊ち繝ｳ濶ｲ*/
 	color: #f5385e;
-	border-bottom: solid 5px #ef1a49; /*ボタン色より暗めに*/
-	border-right: solid 5px #f5385e; /*ボタン色より暗めに*/
+	border-bottom: solid 9px #ef1a49; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
+	border-right: solid 9px #f5385e; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
 }
 
 .square_btn:before {
 	content: " ";
 	position: absolute;
-	bottom: -5px;
+	bottom: -9px;
 	left: -1px;
 	width: 0;
 	height: 0;
-	border-width: 0 6px 6px 0px;
+	border-width: 0 10px 10px 0px;
 	border-style: solid;
 	border-color: transparent;
-	border-bottom-color: #89e5c1; /*背景似合わせる */
+	border-bottom-color: #89e5c1; /*閭梧勹莨ｼ蜷医ｏ縺帙ｋ */
 }
 
 .square_btn:after {
 	content: " ";
 	position: absolute;
 	top: -1px;
-	right: -5px;
+	right: -9px;
 	width: 0;
 	height: 0;
-	border-width: 0px 6px 6px 0px;
+	border-width: 0px 10px 10px 0px;
 	border-style: solid;
 	border-color: #89e5c1;
 	border-bottom-color: transparent;
 }
 
-.square_btn:active { /*ボタンを押したとき*/
+.square_btn:active { /*繝懊ち繝ｳ繧呈款縺励◆縺ｨ縺�*/
 	border: none;
 	-ms-transform: translate(6px, 6px);
 	-webkit-transform: translate(6px, 6px);
@@ -111,7 +148,104 @@ input {
 }
 
 .square_btn:active:after, .square_btn:active:before {
-	content: none; /*ボタンを押すと線が消える*/
+	content: none; /*繝懊ち繝ｳ繧呈款縺吶→邱壹′豸医∴繧�*/
+}
+
+.square_btn_modal_yes {
+	display: inline-block;
+	position: relative;
+	padding: 0.1em 1em;
+	text-decoration: none;
+	background: #ffabbc; /*繝懊ち繝ｳ濶ｲ*/
+	color: #f5385e;
+	border-bottom: solid 9px #ef1a49; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
+	border-right: solid 9px #f5385e; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
+}
+
+.square_btn_modal_yes:before {
+	content: " ";
+	position: absolute;
+	bottom: -9px;
+	left: -1px;
+	width: 0;
+	height: 0;
+	border-width: 0 10px 10px 0px;
+	border-style: solid;
+	border-color: transparent;
+	border-bottom-color: #FFF; /*閭梧勹莨ｼ蜷医ｏ縺帙ｋ */
+}
+
+.square_btn_modal_yes:after {
+	content: " ";
+	position: absolute;
+	top: -1px;
+	right: -9px;
+	width: 0;
+	height: 0;
+	border-width: 0px 10px 10px 0px;
+	border-style: solid;
+	border-color: #FFF;
+	border-bottom-color: transparent;
+}
+
+.square_btn_modal_yes:active { /*繝懊ち繝ｳ繧呈款縺励◆縺ｨ縺�*/
+	border: none;
+	-ms-transform: translate(6px, 6px);
+	-webkit-transform: translate(6px, 6px);
+	transform: translate(6px, 6px);
+}
+
+.square_btn_modal_yes:active:after, .square_btn_modal_yes:active:before
+	{
+	content: none; /*繝懊ち繝ｳ繧呈款縺吶→邱壹′豸医∴繧�*/
+}
+
+.square_btn_modal_no {
+	display: inline-block;
+	position: relative;
+	padding: 0.1em 1em;
+	text-decoration: none;
+	background: #a4b3fc; /*繝懊ち繝ｳ濶ｲ*/
+	color: #2743ef;
+	border-bottom: solid 9px #1b00e7; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
+	border-right: solid 9px #0400d2; /*繝懊ち繝ｳ濶ｲ繧医ｊ證励ａ縺ｫ*/
+}
+
+.square_btn_modal_no:before {
+	content: " ";
+	position: absolute;
+	bottom: -9px;
+	left: -1px;
+	width: 0;
+	height: 0;
+	border-width: 0 10px 10px 0px;
+	border-style: solid;
+	border-color: transparent;
+	border-bottom-color: #FFF; /*閭梧勹莨ｼ蜷医ｏ縺帙ｋ */
+}
+
+.square_btn_modal_no:after {
+	content: " ";
+	position: absolute;
+	top: -1px;
+	right: -9px;
+	width: 0;
+	height: 0;
+	border-width: 0px 10px 10px 0px;
+	border-style: solid;
+	border-color: #FFF;
+	border-bottom-color: transparent;
+}
+
+.square_btn_modal_no:active { /*繝懊ち繝ｳ繧呈款縺励◆縺ｨ縺�*/
+	border: none;
+	-ms-transform: translate(6px, 6px);
+	-webkit-transform: translate(6px, 6px);
+	transform: translate(6px, 6px);
+}
+
+.square_btn_modal_no:active:after, .square_btn_modal_no:active:before {
+	content: none; /*繝懊ち繝ｳ繧呈款縺吶→邱壹′豸医∴繧�*/
 }
 
 .ok-btn {
@@ -129,4 +263,46 @@ input {
 	box-shadow: none;
 	padding: 2rem 8px;
 	text-align: center;
+}
+
+.round-input--extend {
+	padding: 8px 8px;
+}
+
+.share-btn {
+	width: 5%;
+	margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+/* canvas css 
+.konvajs-content {
+	width: 100% !important;
+	height: auto !important;
+	padding-bottom: 56%;
+}
+
+canvas {
+	width: 114.285714% !important;
+	height: 114.285714% !important;
+}
+*/
+#container {
+	background-color: #FFF;
+}
+
+.run-animation {
+	animation-name: icon_opacity;
+	animation-timing-function: liner;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	animation-duration: 10s;
+}
+
+@keyframes icon_opacity { 
+	0% {
+	opacity: 1.0;
+	}
+	100% {
+	opacity: 0;
+	}
 }
