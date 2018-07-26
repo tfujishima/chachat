@@ -105,13 +105,13 @@ var BotUser = (function(){
 	BotUser.prototype.doCommand = function(message){
 		var command = message.split(' ')[0];
 		switch(command){
-		case: "\say":
+		case "\say":
 			break;
-		case; "\roulette":
+		case "\roulette":
 			break;
-		case; "\topic":
+		case "\topic":
 			break;
-		case: "\help":
+		case "\help":
 			break;
 		default:
 		}
