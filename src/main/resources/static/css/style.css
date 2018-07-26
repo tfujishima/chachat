@@ -10,6 +10,8 @@
 	}
 	
 .kakugen_text {
+	animation-duration: 2s; /* アニメーションの時間 */
+    animation-delay: 1s; /* アニメーション開始時間 */
 	font-size: 30pt;
 	font-weight: bold;
 	text-align: center;
