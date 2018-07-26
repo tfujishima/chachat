@@ -59,16 +59,25 @@ a:active {
 	text-decoration: none
 }
 
-input, textarea{
+input, textarea {
 	background-color: #eeeeee;
 }
 
-input[type="radio"] {
-	display: none; 	/* ラジオボタンを非表示にする */
+input[type="checkbox"] {
+	/*display: none;*/ /* ラジオボタンを非表示にする */
+	
 }
 
-.text {
-	
+select {
+	background-color: #ffabbc;
+	color: #f5385e;
+	height: 90%;
+}
+
+.tool {
+	background-color: #FFF;
+	border: solid 3px #f5385e; /*線*/
+	border-radius: 10px; /*角の丸み*/
 }
 
 /* 譫�縺斐→ */
@@ -248,11 +257,14 @@ input[type="radio"] {
 	text-align: center;
 }
 
+.round-input--extend {
+	padding: 8px 8px;
+}
+
 .share-btn {
 	width: 5%;
 	margin: 0.5rem 0.5rem 0.5rem 0;
 }
-
 
 /* canvas css 
 .konvajs-content {
@@ -266,3 +278,27 @@ canvas {
 	height: 114.285714% !important;
 }
 */
+.run-animation {
+	animation-name: icon_opacity;
+	animation-timing-function: liner;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	animation-duration: 30s;
+}
+
+@
+keyframes icon_opacity { 0% {
+	opacity: 1.0;
+}
+100%
+{
+opacity
+
+
+:
+
+ 
+
+0;
+}
+}
