@@ -1,15 +1,155 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Chachat</title>
-  <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+<meta charset="UTF-8">
+<title>Chachat</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+	crossorigin="anonymous">
+
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
 </head>
 <body>
-  <h1>Chachat</h1>
-  <!-- canvas is here -->
-  <p>chachat room page</p>
-  <!-- chat is here -->
-  <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+	<input id="userNameHidden" type="hidden"
+		th:value="|${session['userName']}|" readonly></input>
+
+	<div class="container-fluid">
+		<div class="row my-1 text-center mx-auto" data-toggle="buttons">
+			<div class="mx-auto tool py-1 px-3">
+				<i class="fa fa-toolbox"></i> <select id="tool" class="">
+					<option value="brush">ペン</option>
+					<option value="eraser">消しゴム</option>
+				</select>
+				<!--  <button type=button id="create-tag">付箋召喚</button> -->
+				<!-- 
+				<button type=button onclick="stageManager.pushStageData()">データプッシュ</button>
+				<button type=button
+					onclick="stageManager.syncStageDataFromServer();">データプル</button>
+				 -->
+				<div class="btn-group">
+					<!-- <input type="checkbox" onclick="changeMode();" id="tool"
+					class="toggle-button"><label for="tool" class=""><i  id="tool_icon"
+					class="fas fa-pen"></i></label> <label for="tool-pen"
+					class="square_btn m-0"><input type="radio" id="tool-pen"
+					class="" autocomplete="off" checked><i class="fas fa-pen"></i></label>
+				<label for="tool-eraser" class="square_btn m-0"><input
+					type="radio" id="tool-eraser" autocomplete="off"><i
+					class="fas fa-eraser m-0"></i></label>
+					 -->
+					<button type="button" id="create-tag"
+						class="square_btn_modal_yes btn-group">
+						<i class="fas fa-file-alt"></i>
+					</button>
+					<!-- Button trigger modal -->
+					<button type="button" class="square_btn_modal_yes">
+						<i class="fa fa-trash-alt"></i>
+					</button>
+					<button type="button" class="square_btn_modal_yes"
+						data-toggle="modal" data-target="#askEnd">おわり</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<!-- 
+		<div class="col-md-2">
+			<p>hoge</p>
+		</div>
+	-->
+			<div class="mx-auto">
+				<div id="container"></div>
+			</div>
+		</div>
+
+		<!-- chat is here -->
+		<div class="row text-center">
+			<div class="col-1 p-0">
+				<img th:src="@{/img/char0.png}" id="me" class="w-75 run-animation">
+			</div>
+			<div class="col-8">
+				<textarea id="message-history" class="w-100" cols=100 rows=5
+					readonly style="overflow: hidden; resize: none;"></textarea>
+			</div>
+			<div class="col-3">
+				<div class="row">
+					<div id="ch1" class="col" style="visibility: hidden">
+						<img th:src="@{/img/chara1.png}" class="w-100">
+					</div>
+					<div id="ch2" class="col" style="visibility: hidden">
+						<img th:src="@{/img/chara2.png}" class="w-100">
+					</div>
+					<div id="ch3" class="col" style="visibility: hidden">
+						<img th:src="@{/img/char3.png}" class="w-100">
+					</div>
+				</div>
+				<div class="row"></div>
+			</div>
+		</div>
+		<form class="" id="chat-form" autocomplete="off">
+			<div class="row">
+				<div class="form-group col-7 offset-1 pr-0">
+					<label for="message" class="sr-only">chat</label> <input
+						type="text" class="form-control round-input round-input--extend"
+						id="message" placeholder="input here">
+				</div>
+				<div class="col-2">
+					<button type="submit" id="send-message-button" class="square_btn">送信</button>
+				</div>
+			</div>
+		</form>
+
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="askEnd" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class=""></div>
+					<div class="m-5">
+						<img alt="終了確認" th:src="@{/img/askEnd.png}" class="w-100">
+					</div>
+					<div class="mt-4 mb-2 text-center">
+						<button type="button" class="square_btn_modal_no mx-2"
+							data-dismiss="modal">まだやる！</button>
+						<a th:href="@{/end/}" class="square_btn_modal_yes mx-2">いいよ！</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	
+
+		<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+		<script th:src="@{/webjars/konva/2.1.7/konva.min.js}"></script>
+		<script th:src="@{/webjars/stomp-websocket/2.3.3-1/stomp.min.js}"></script>
+		<script th:src="@{/webjars/sockjs-client/1.1.5/dist/sockjs.min.js}"></script>
+		<script src="/js/collaborate_canvas.js"
+			th:src="@{/js/collaborate_canvas.js}"></script>
+		<script src="/js/collaborate_chat.js"
+			th:src="@{/js/collaborate_chat.js}"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+			integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+			integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+			crossorigin="anonymous"></script>
+		<script>
+			$('#send-message-button').on('click', function() {
+				$('#me').removeClass('run-animation');
+				$('#me')[0].offsetWidth = $('#me')[0].offsetWidth;
+				$('#me').addClass('run-animation');
+			});
+			
+			
+		</script>
+	</div>
 </body>
 </html>

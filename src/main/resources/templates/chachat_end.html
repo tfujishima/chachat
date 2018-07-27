@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chachat</title>
+  <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+  <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+  <link href="/js/kakugen.js" th:href="@{/js/kakugen.js}"></link>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"></link>
+  
+</head>
+
+
+<body>
+
+  <br><br><br>
+
+  <img alt="otsu.png" th:src="@{/image/otsu.png}" class="end_otsu"></img>
+
+  <p class="kakugen_title">本日の格言</p>
+  
+  <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+  <div class="kakugen_text"> 
+  	<div class="animated fadeIn" id="animate">
+  <script src="/js/kakugen.js" th:src="@{/js/kakugen.js}"></script>
+  	</div>
+  </div>
+  
+  <a th:href="@{/}" class="float-right square_btn ok-btn mr-5">TOP</a>
+  
+<!-- <img alt="top.png" th:src="@{/image/top.png}" class="end_top">-->
+  
+</body>
+</html>
